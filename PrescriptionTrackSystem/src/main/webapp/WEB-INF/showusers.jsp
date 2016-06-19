@@ -247,7 +247,7 @@
 													<li><a data-toggle="modal" href="#stack1" onclick="edit(this);"
 														class="btn green" lang="406"> <i class="icon-pencil"></i>编辑
 													</a></li>
-													<li><a href="javascript:void(0)" lang=${user.id }
+													<li><a href="#myModal1" lang=${user.id }  data-toggle="modal" 
 														onclick="deleteUser(this)" class="btn red" lang="406">
 															<i class="icon-trash"></i>删除
 													</a></li>
@@ -262,6 +262,21 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<!-- 模态框，确认删除 -->
+						<div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+								<h3 id="myModalLabel1">确认删除？</h3>
+							</div>
+							<div class="modal-body">
+								<p>删除的数据不可恢复</p>
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+								<button id="deleteUser"  data-dismiss="modal" class="btn red">确定</button>
+							</div>
+						</div>
+
 						<div class="pagination" style="margin-right: 100px;">
 							<ul>
 								<li><a class="icon-step-backward"
@@ -476,21 +491,23 @@
 		//删除用户
 		function deleteUser(item) {
 			var id = $(item).attr("lang");
-			$.ajax({
-				type : "post",
-				data : {
-					"id" : id
-				},
-				url : "deleteUser",
-				success : function(data) {
-					if (data) {
-						$.tooltip('操作成功！', 2000, true);
-						$(item).parent().parent().parent().parent().parent()
-								.remove();
-					} else {
-						$.tooltip('操作失败，请稍后再试！', 2000, false);
-					}
-				},
+			$("#deleteUser").click(function(){
+				$.ajax({
+					type : "post",
+					data : {
+						"id" : id
+					},
+					url : "deleteUser",
+					success : function(data) {
+						if (data) {
+							$.tooltip('操作成功！', 2000, true);
+							$(item).parent().parent().parent().parent().parent()
+									.remove();
+						} else {
+							$.tooltip('操作失败，请稍后再试！', 2000, false);
+						}
+					},
+				});				
 			});
 		}
 		function S4() {
