@@ -263,7 +263,9 @@
 						</p>
 					</div>
 				</div>
-					
+				<div>
+					<div id="columnchart"></div>
+				</div>
 				<div id="dashboard">
 					<div class="clearfix"></div>
 					<div class="row-fluid">
@@ -342,16 +344,9 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="row-fluid">
 						<div class="system">
-							<img alt="" src="${pageContext.request.contextPath }/image/system/uml.png">
-							<img alt="" src="${pageContext.request.contextPath }/image/system/doctor.png">
-							<img alt="" src="${pageContext.request.contextPath }/image/system/department.png">
-							<img alt="" src="${pageContext.request.contextPath }/image/system/position.png">
-							<img alt="" src="${pageContext.request.contextPath }/image/system/prescription.png">
-							<img alt="" src="${pageContext.request.contextPath }/image/system/prescriptiondetail.png">
-							<img alt="" src="${pageContext.request.contextPath }/image/system/medicine.png">
-							<img alt="" src="${pageContext.request.contextPath }/image/system/user.png">
 						</div>
 					</div>
 				</div>
@@ -368,46 +363,28 @@
 			</span>
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath}/js/jquery-1.10.1.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="${pageContext.request.contextPath}/js/jquery-1.10.1.min.js" type="text/javascript"></script>      
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.slimscroll.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.blockui.min.js" type="text/javascript"></script>  
-	<script src="${pageContext.request.contextPath}/js/jquery.cookie.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.uniform.min.js" type="text/javascript" ></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.vmap.js" type="text/javascript"></script>   
-	<script src="${pageContext.request.contextPath}/js/jquery.vmap.russia.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.vmap.world.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.vmap.europe.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.vmap.germany.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.vmap.usa.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.vmap.sampledata.js" type="text/javascript"></script>  
-	<script src="${pageContext.request.contextPath}/js/jquery.flot.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.flot.resize.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.pulsate.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/date.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/daterangepicker.js" type="text/javascript"></script>     
-	<script src="${pageContext.request.contextPath}/js/jquery.gritter.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/fullcalendar.min.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.easy-pie-chart.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.sparkline.min.js" type="text/javascript"></script>  
-	<!-- END PAGE LEVEL PLUGINS -->
-	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="${pageContext.request.contextPath}/js/app.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/index.js" type="text/javascript"></script>        
-	<!-- END PAGE LEVEL SCRIPTS -->  
+	<script src="${pageContext.request.contextPath}/js/index.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/highcharts/highcharts.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/highcharts/custom.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/highcharts/exporting.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/highcharts/highcharts-3d.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(function() {    
 		   App.init();
-		   Index.init();
-		   Index.initJQVMAP(); 
-		   Index.initCalendar();
-		   Index.initCharts();
-		   Index.initChat();
 		   Index.initMiniCharts();
-		   Index.initDashboardDaterange();
-		   Index.initIntro();
+		   $.ajax({
+				url : "getData",
+				type : "GET",
+				dataType : 'json',
+				success : function(data) {
+					ColumnChart("#columnchart",data);
+				}
+			});
 		});
 	</script>
 </html>
