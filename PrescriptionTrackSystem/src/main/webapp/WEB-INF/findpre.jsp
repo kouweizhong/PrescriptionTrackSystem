@@ -245,8 +245,11 @@
 												<p>副作用：${pre.medicine.sideeffect }</p>
 												<c:if test="${pre.canuse == '是' }">
 													可使用的替代药品列表:
+													<c:if test="${empty pre.medicine.substitutes}">
+																没有可用的替代的药物信息！
+													</c:if>
 													<c:forEach items="${pre.medicine.substitutes }" var="medicine">
-											×&		${medicine.name } &nbsp;&nbsp;
+														${medicine.name } &nbsp;、
 													</c:forEach>
 												</c:if>												
 												<hr>
