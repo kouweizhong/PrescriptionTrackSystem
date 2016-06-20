@@ -222,21 +222,26 @@
 							<c:forEach items="${prescriptions }" var="prescription">
 								<li class="timeline-green">
 									<div class="timeline-time">
-										<span class="time">${prescription.begindate }</span>
+										<span style="font-size: 30px;" class="time">${prescription.begindate }</span>
 										<span class="date">结束时间：${prescription.enddate }</span>
 									</div>
 									<div class="timeline-icon"><i class="icon-time"></i></div>
 									<div class="timeline-body">
-										<h2>姓名：${prescription.user.name }
-											&nbsp;&nbsp;
-											 医师姓名：${prescription.doctor.name }
-											 &nbsp;&nbsp;
-											 电话：${prescription.doctor.telephone }
-											 &nbsp;&nbsp;
-											 可取药次数：${prescription.crawlagainst }
+										 <h2>
+										 	 <span style="display: none;">${prescription.user.id }</span>
+										 	 <span>姓名：${prescription.user.name }&nbsp;&nbsp;</span>
+											 <span>医师姓名：${prescription.doctor.name }&nbsp;&nbsp;</span>
+											 <span>电话：${prescription.doctor.telephone }&nbsp;&nbsp;</span>
+											 <span>可取药次数：${prescription.crawlagainst }</span>
+											 <a data-toggle="modal" lang=${prescription.id } href="#myModal1" onclick="deletePre(this)">
+												 <button style="float: right;margin-top: -0px;" type="button" class="btn red delete">
+													<i class="icon-trash icon-white"></i>
+													<span>删除</span>
+												</button>
+											 </a>											 
 										</h2>
 										<div class="timeline-content">
-											<a style="float:right;display: inline;" class="btn purple big">
+											<a href="${pageContext.request.contextPath }/updatePre/${prescription.id }" style="float:right;display: inline;" class="btn purple big">
 												修改<i class="m-icon-big-swapright m-icon-white"></i>
 											</a>
 											<c:forEach items="${prescription.prescriptionDetails }" var="pre">
@@ -266,6 +271,22 @@
 		</div>
 		<!-- END PAGE -->
 	</div>
+	
+	<!-- 模态框，确认删除 -->
+	<div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h3 id="myModalLabel1">确认删除？</h3>
+		</div>
+		<div class="modal-body">
+			<p>删除的数据不可恢复</p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+			<button id="deletePre"  data-dismiss="modal" class="btn red">确定</button>
+		</div>
+	</div>
+
 	<!-- END CONTAINER -->
 	<div class="footer">
 		<div class="footer-inner">2013 &copy; Silence 940109</div>
@@ -296,6 +317,9 @@
 	<script src="${pageContext.request.contextPath}/js/app.js"></script>
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
+		
+		var pid;//存储处方的id编号
+		var uid;//保存用户的id编号
 		jQuery(document).ready(function() {
 			App.init();
 			var colors = ['timeline-yellow','timeline-blue','timeline-green','timeline-purple','timeline-red','timeline-grey'];
@@ -306,7 +330,14 @@
 			$(".timeline-content").find("a").each(function(index){
 				$(this).attr({"class":index > btn_colors.length ? btn_colors[(index) % btn_colors.length] : btn_colors[index]});
 			});
+			$("#deletePre").click(function(){
+				window.location.href = window.location.pathname.substring(0,25) + "deletePre/"+pid+"/"+uid;
+			});
 		});
+		function deletePre(item){
+			pid = $(item).attr("lang").trim();
+			uid = $(item).parent().find("span:first").text().trim();
+		}
 	</script>
 </body>
 <!-- END BODY -->
