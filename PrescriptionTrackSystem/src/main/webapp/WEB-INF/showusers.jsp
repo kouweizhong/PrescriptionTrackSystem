@@ -151,8 +151,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<!-- BEGIN STYLE CUSTOMIZER -->
-						<div class="color-panel hidden-pho
-			ne">
+						<div class="color-panel hidden-phone">
 							<div class="color-mode-icons icon-color"></div>
 							<div class="color-mode-icons icon-color-close"></div>
 							<div class="color-mode">
@@ -191,7 +190,7 @@
 						</div>
 						<!-- END BEGIN STYLE CUSTOMIZER -->
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
-						<h3 class="page-title">处方信息管理系统</h3>
+						<h3 class="page-title">处方信息跟踪</h3>
 						<ul class="breadcrumb">
 							<li><i class="icon-home"></i> <a href="index">主页</a> <i
 								class="icon-angle-right"></i></li>
@@ -202,7 +201,6 @@
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
 				</div>
-
 				<!-- BEGIN SAMPLE TABLE PORTLET-->
 				<div class="portlet box green">
 					<div class="portlet-title">
@@ -245,14 +243,14 @@
 												</a>
 												<ul class="dropdown-menu">
 													<li><a data-toggle="modal" href="#stack1" onclick="edit(this);"
-														class="btn green" lang="406"> <i class="icon-pencil"></i>编辑
+														class="btn green"> <i class="icon-pencil"></i>编辑
 													</a></li>
 													<li><a href="#myModal1" lang=${user.id }  data-toggle="modal" 
-														onclick="deleteUser(this)" class="btn red" lang="406">
+														onclick="deleteUser(this)" class="btn red">
 															<i class="icon-trash"></i>删除
 													</a></li>
 													<li><a href="javascript:void(0)" lang=${user.id }
-														onclick="findPre(this)" class="btn blue" lang="406"> <i
+														onclick="findPre(this)" class="btn blue"> <i
 															class="icon-ban-circle"></i>处方记录
 													</a></li>
 												</ul>
@@ -301,6 +299,12 @@
 						</div>
 					</div>
 				</div>
+				
+				<div id="container"></div>
+				<!-- 用于显示病人信息的百分比 -->
+				<div>
+					<div id="columnchart"></div>
+				</div>			
 				<!-- END SAMPLE TABLE PORTLET-->
 
 				<!-- 弹出层，修改用户信息 -->
@@ -368,9 +372,9 @@
 				<!-- 弹出层，修改用户信息结束 -->
 			</div>
 		</div>
-		<!-- END PAGE -->
-
+		<!-- END PAGE --
 	</div>
+	
 	<!-- END CONTAINER -->
 	<div class="footer">
 		<div class="footer-inner">2013 &copy; Silence 940109</div>
@@ -400,9 +404,37 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/clockface.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/date.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/daterangepicker.js"></script>
+	
+	<script src="${pageContext.request.contextPath}/js/highcharts/highcharts.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/highcharts/custom.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/highcharts/exporting.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/form-components.js"></script>
 	<script>
 		jQuery(document).ready(function() {
+			//显示不同年龄段人数的分布
+			$.ajax({
+				type:"get",
+				url:"getCountByAge",
+				success:function(data){
+					data = eval('('+ data + ')');
+					var year = [];
+					var count = [];
+					for (var i = 0; i < data.length; i++){
+						year.push(data[i][1]);
+						count.push(data[i][0]);
+					}
+					showYear("#container",year,count);
+				}
+			});
+			//显示不同承保部门人数所占的百分比
+			$.ajax({
+				url : "getData",
+				type : "GET",
+				dataType : 'json',
+				success : function(data) {
+					ColumnChart("#columnchart",data);
+				}
+			});	
 			App.init();
 			TableAdvanced.init();
 			FormComponents.init();
