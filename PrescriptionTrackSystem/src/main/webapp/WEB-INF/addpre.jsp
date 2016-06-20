@@ -31,8 +31,6 @@
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap-fileupload.css" />
-<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/jquery.gritter.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/chosen.css" />
