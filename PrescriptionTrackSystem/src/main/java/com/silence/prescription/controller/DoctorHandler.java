@@ -28,7 +28,6 @@ public class DoctorHandler {
 	public String index(){
 		return "index";
 	}
-	
 	/*
 	 * 医生登录
 	 */
@@ -41,7 +40,7 @@ public class DoctorHandler {
 		}
 		if (doctor != null){
 			session.setAttribute("doctor", doctor);
-			return "index";
+			return "redirect:index";
 		}else{
 			return "forward:/login.html?loginError=true";
 		}

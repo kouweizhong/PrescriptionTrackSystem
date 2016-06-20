@@ -1,10 +1,14 @@
 package com.silence.prescription.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +20,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
 import com.silence.prescription.entities.User;
-import com.silence.prescription.services.BaseService;
+import com.silence.prescription.services.UserService;
+import com.silence.prescription.utils.InsuranceCompany;
 
 @Scope("prototype")
 @Controller
 public class UserHandler {
 
 	@Autowired
-	private BaseService<User> userService;
+	private UserService userService;
+	private static Gson gson = new Gson();
+
+	/*
+	 * 获取不同年龄的人数
+	 */
+	@RequestMapping(value="/getCountByAge",method=RequestMethod.GET)
+	public void getCountByAge(HttpServletResponse response) throws IOException{
+		List<Object[]> data = userService.findByAgeCount();
+		System.out.println(gson.toJson(data));
+		response.getWriter().print(gson.toJson(data));
+	}
+	/*
+	 * 获取所有病人的年 月 日
+	 */
+	@RequestMapping(value="/findByYeayMontheDay",method=RequestMethod.GET)
+	public void getDate(HttpServletResponse response) throws IOException{
+		List<Object[]> data = userService.findByYeayMontheDay();
+		response.getWriter().println(gson.toJson(data).replaceAll("\"", ""));
+	}
+
+	/*
+	 * 获取各个承保公司的人数
+	 */
+	@RequestMapping(value="/getData",method=RequestMethod.GET)
+	public void getData(HttpServletResponse response) throws IOException{
+		Long total = userService.count();
+		List<Object[]> infos = userService.get();
+		Set<InsuranceCompany> sets = new HashSet<InsuranceCompany>();
+		for (Object [] obj : infos){
+			InsuranceCompany c = new InsuranceCompany((String) obj[1],
+					((Long) obj[0]).doubleValue() / total.doubleValue() * 100);
+			sets.add(c);
+		}
+		response.setCharacterEncoding("utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.print(gson.toJson(sets));
+	}
 
 	/*
 	 * 全表扫面病人的信息

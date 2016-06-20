@@ -42,6 +42,32 @@ public class PrescriptionHandler {
 	private BaseService<Prescription> prescriptionService;
 	
 	/*
+	 *  根据处方的id编号查询处方信息
+	 *  pid 处方id
+	 */
+	@RequestMapping(value="/updatePre/{pid}",method=RequestMethod.GET)
+	public String findPrescription(@PathVariable("pid") Integer pid,
+			Map<String,Object> map){
+		Prescription prescription = prescriptionService.find(pid);
+		List<Medicine> medicines = medicineService.find();
+		map.put("medicines", medicines);
+		map.put("prescription", prescription);
+		return "updatepre";
+	}
+	
+	/*
+	 * 删除处方信息
+	 * pid 处方id编号
+	 * uid 用户id编号
+	 */
+	@RequestMapping(value="/deletePre/{pid}/{uid}",method=RequestMethod.GET)
+	public String deletePrescription(@PathVariable("pid") Integer pid,
+			@PathVariable("uid") Integer uid){ 
+		prescriptionService.delete(pid);
+		return "redirect:/findPre/"+uid;
+	}
+	
+	/*
 	 * 根据用户的id查找处方记录
 	 */
 	@RequestMapping("/findPre/{id}")
