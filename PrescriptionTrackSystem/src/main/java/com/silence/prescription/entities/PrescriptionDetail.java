@@ -89,5 +89,19 @@ public class PrescriptionDetail {
 	public void setMedicine(Medicine medicine) {
 		this.medicine = medicine;
 	}
+
+	public PrescriptionDetail() {
+		super();
+	}
+
+	public PrescriptionDetail(int id, int count, String unit,
+			String takemethod, String canuse) {
+		super();
+		this.id = id;
+		this.count = count;
+		this.unit = unit;
+		this.takemethod = takemethod;
+		this.canuse = canuse;
+	}
 	
 }

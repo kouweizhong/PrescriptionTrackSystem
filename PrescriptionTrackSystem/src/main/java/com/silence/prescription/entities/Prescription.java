@@ -106,6 +106,16 @@ public class Prescription {
 	public void setPrescriptionDetails(Set<PrescriptionDetail> prescriptionDetails) {
 		this.prescriptionDetails = prescriptionDetails;
 	}
-	
+
+	public Prescription() {
+		super();
+	}
+
+	public Prescription(int id, Date enddate, int crawlagainst) {
+		super();
+		this.id = id;
+		this.enddate = enddate;
+		this.crawlagainst = crawlagainst;
+	}
 	
 }
