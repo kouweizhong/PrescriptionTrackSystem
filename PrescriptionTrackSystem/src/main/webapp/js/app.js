@@ -122,7 +122,7 @@ var App = function () {
                 }   
                 resize = setTimeout(function() {
                     console.log('resize');
-                    //handleResponsive();    
+                    handleResponsive();    
                 }, 50); // wait 50ms until window resize finishes.
             });
         }   
@@ -329,6 +329,12 @@ var App = function () {
             $('.sidebar-search').removeClass("open");
         });
 
+
+
+        // handle the search submit
+        $('.sidebar-search .submit').on('click', function (e) {
+            e.preventDefault();
+        });
     }
 
     var handleHorizontalMenu = function () {
@@ -343,7 +349,6 @@ var App = function () {
                 }
                 e.preventDefault();
             });
-
 
     }
 
@@ -622,7 +627,7 @@ var App = function () {
 
         // handle theme colors
         var setColor = function (color) {
-            $('#style_color').attr("href", "css/themes/" + color + ".css");
+            $('#style_color').attr("href", "assets/css/themes/" + color + ".css");
             $.cookie('style_color', color);                
         }
 
@@ -748,6 +753,7 @@ var App = function () {
         blockUI: function (el, centerY) {
             var el = jQuery(el); 
             el.block({
+                    message: '<img src="./assets/img/ajax-loading.gif" align="">',
                     centerY: centerY != undefined ? centerY : true,
                     css: {
                         top: '10%',
