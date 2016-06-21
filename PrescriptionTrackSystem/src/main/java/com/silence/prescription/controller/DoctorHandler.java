@@ -5,7 +5,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.silence.prescription.entities.Doctor;
 import com.silence.prescription.services.BaseService;
 
-@Scope("prototype")
 @Controller
 public class DoctorHandler {
 
@@ -22,12 +20,21 @@ public class DoctorHandler {
 	private BaseService<Doctor> doctorService;
 
 	/*
+	 *退出 
+	 */
+	@RequestMapping(value="/doctorLogout",method=RequestMethod.GET)
+	public String logout(){
+		return "forword:login.html";
+	}
+	
+	/*
 	 * 跳转到主页面
 	 */
 	@RequestMapping(value="/index",method=RequestMethod.GET)
 	public String index(){
 		return "index";
 	}
+	
 	/*
 	 * 医生登录
 	 */
@@ -45,11 +52,5 @@ public class DoctorHandler {
 			return "forward:/login.html?loginError=true";
 		}
 	}
-	/*
-	 *退出 
-	 */
-	@RequestMapping(value="/doctorLogout",method=RequestMethod.GET)
-	public String logout(){
-		return "forword:login.html";
-	}
+
 }

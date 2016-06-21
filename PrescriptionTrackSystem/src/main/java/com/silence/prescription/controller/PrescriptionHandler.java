@@ -42,6 +42,19 @@ public class PrescriptionHandler {
 	private BaseService<Prescription> prescriptionService;
 	
 	/*
+	 * 更新处方信息
+	 */
+	@RequestMapping(value="updatePrescription",method=RequestMethod.POST)
+	public void updatePrescription(@RequestParam("crawlagainst") Integer crawlagainst,
+			@RequestParam("enddate") Date enddate,@RequestParam("id") Integer id,
+			PrintWriter writer){
+		Prescription pre = new Prescription(id, enddate, crawlagainst); 
+		System.out.println(enddate.toString());
+		prescriptionService.update(pre);
+		writer.print(1);
+	}
+	
+	/*
 	 *  根据处方的id编号查询处方信息
 	 *  pid 处方id
 	 */
