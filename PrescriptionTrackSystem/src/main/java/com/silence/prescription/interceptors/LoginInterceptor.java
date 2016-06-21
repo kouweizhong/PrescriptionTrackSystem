@@ -16,7 +16,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("doctor") == null){
-		    response.sendRedirect("login.html?noLogin=true");
+		    response.sendRedirect(request.getContextPath()+"/login.html?noLogin=true");
 		    return false;
 		}
 		return true;
