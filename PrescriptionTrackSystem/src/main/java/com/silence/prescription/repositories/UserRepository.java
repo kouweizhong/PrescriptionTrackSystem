@@ -27,7 +27,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	@Query("from User u where concat(u.name,u.birthday,u.telephone,u.insuranceCompany,u.policyNumber) like CONCAT('%',:search,'%')")
 	public List<User> findUserByAll(@Param("search") String search);
 	
-	//根据承保公司计算用户的数量
+	//根据承保公司计算用户的数量	
 	@Query("select count(*),insuranceCompany from User u group by u.insuranceCompany")
 	public List<Object[]> countUser();
 
