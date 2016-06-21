@@ -59,36 +59,6 @@
 				<!-- END RESPONSIVE MENU TOGGLER -->
 				<!-- BEGIN TOP NAVIGATION MENU -->
 				<ul class="nav pull-right">
-					<li class="dropdown" id="header_inbox_bar"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="icon-envelope"></i> <span class="badge">3</span>
-					</a>
-						<ul class="dropdown-menu extended inbox">
-							<li>
-								<p>你有三条新消息</p>
-							</li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar2.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">婷心</span>
-										<span class="time">刚刚</span>
-								</span> <span class="message"> 干啥子 </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar3.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">智利</span>
-										<span class="time">16 分钟前</span>
-								</span> <span class="message"> 你在干啥 </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar1.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">波里</span>
-										<span class="time">2小时前</span>
-								</span> <span class="message"> 长沙理工大学 </span>
-							</a></li>
-							<li class="external"><a href="#">查看所有信息 <i
-									class="m-icon-swapright"></i></a></li>
-						</ul></li>
-					<!-- END INBOX DROPDOWN -->
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 					<li class="dropdown user"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <img alt=""

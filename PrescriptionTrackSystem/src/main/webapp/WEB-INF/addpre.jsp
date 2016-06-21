@@ -8,61 +8,33 @@
 <meta charset="utf-8" />
 <title>病人信息管理</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="" name="description" />
-<meta content="" name="author" />
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/style-metro.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/style.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/style-responsive.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/default.css"
-	rel="stylesheet" type="text/css" id="style_color" />
-<link href="${pageContext.request.contextPath}/css/uniform.default.css"
-	rel="stylesheet" type="text/css" />
-<!-- END GLOBAL MANDATORY STYLES -->
-<!-- BEGIN PAGE LEVEL STYLES -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/jquery.gritter.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/chosen.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/select2_metro.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/jquery.tagsinput.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/clockface.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap-wysihtml5.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/datepicker.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/timepicker.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/colorpicker.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap-toggle-buttons.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/daterangepicker.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/multi-select-metro.css" />
-<link href="${pageContext.request.contextPath}/css/bootstrap-modal.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/pricing-tables.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/jqueryui/animate.min.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/jqueryui/common.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/style-metro.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/style-responsive.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/default.css" rel="stylesheet" type="text/css" id="style_color" />
+<link href="${pageContext.request.contextPath}/css/uniform.default.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery.gritter.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chosen.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/select2_metro.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery.tagsinput.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/clockface.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-wysihtml5.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/timepicker.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-toggle-buttons.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/multi-select-metro.css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/pricing-tables.css"rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/jqueryui/animate.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/jqueryui/common.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+</style>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -81,41 +53,7 @@
 					src="${pageContext.request.contextPath}/image/menu-toggler.png"
 					alt="" />
 				</a>
-				<!-- END RESPONSIVE MENU TOGGLER -->
-				<!-- BEGIN TOP NAVIGATION MENU -->
 				<ul class="nav pull-right">
-					<li class="dropdown" id="header_inbox_bar"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="icon-envelope"></i> <span class="badge">3</span>
-					</a>
-						<ul class="dropdown-menu extended inbox">
-							<li>
-								<p>你有三条新消息</p>
-							</li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar2.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">婷心</span>
-										<span class="time">刚刚</span>
-								</span> <span class="message"> 干啥子 </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar3.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">智利</span>
-										<span class="time">16 分钟前</span>
-								</span> <span class="message"> 你在干啥 </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar1.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">波里</span>
-										<span class="time">2小时前</span>
-								</span> <span class="message"> 长沙理工大学 </span>
-							</a></li>
-							<li class="external"><a href="#">查看所有信息 <i
-									class="m-icon-swapright"></i></a></li>
-						</ul></li>
-					<!-- END INBOX DROPDOWN -->
-
-					<!-- BEGIN USER LOGIN DROPDOWN -->
 					<li class="dropdown user"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <img alt=""
 							src="${pageContext.request.contextPath}/image/avatar1_small.jpg" />
@@ -133,12 +71,9 @@
 							<li><a href=""><i class="icon-lock"></i> 关闭系统</a></li>
 							<li><a href="doctorLogout"><i class="icon-key"></i> 退出</a></li>
 						</ul></li>
-					<!-- END USER LOGIN DROPDOWN -->
 				</ul>
-				<!-- END TOP NAVIGATION MENU -->
 			</div>
 		</div>
-		<!-- END TOP NAVIGATION BAR -->
 	</div>
 	<!-- END HEADER -->
 
@@ -410,64 +345,31 @@
 			</span>
 		</div>
 	</div>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery-1.10.1.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery-migrate-1.2.1.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery-ui-1.10.1.custom.min.js"
-		type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.slimscroll.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.blockui.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.cookie.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.uniform.min.js"
-		type="text/javascript"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/chosen.jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/select2.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/wysihtml5-0.3.0.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/bootstrap-wysihtml5.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.tagsinput.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.toggle.buttons.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/clockface.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/date.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/daterangepicker.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/bootstrap-colorpicker.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/bootstrap-timepicker.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.inputmask.bundle.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.multi-select.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap-modal.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/bootstrap-modalmanager.js"
-		type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.blockui.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.uniform.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/chosen.jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/select2.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/wysihtml5-0.3.0.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-wysihtml5.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.tagsinput.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.toggle.buttons.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/clockface.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/date.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/daterangepicker.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-colorpicker.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-timepicker.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.inputmask.bundle.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.multi-select.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap-modal.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/app.js"></script>
 	<script src="${pageContext.request.contextPath}/js/form-components.js"></script>
 	<script
@@ -479,6 +381,8 @@
 			App.init();
 			FormComponents.init();
 		});
+		
+		//移除处方详细信息
 		function removepre(item){
 			var id = $(item).attr("lang");
 			$.ajax({
@@ -547,8 +451,8 @@
 				if (take_method == ""){					
 					take_method = "暂无说明";
 				}
-				var $str = $("<div class=span3><div class='pricing-table'><h3>"+name
-				+"</h3><div class='desc'>Duis mollis, est non commodo luctus,nisi erat porttitor ligula, eget lacinia odio sem nec elit.</div><ul><li><i class='icon-angle-right'></i>数量:"+count+
+				var $str = $("<div class='span3'><div class='pricing-table'><h5>"+name
+				+"</h5><ul><li><i class='icon-angle-right'></i>数量:"+count+
 				"</li><li><i class='icon-angle-right'></i>单位："+unit+
 				"</li><li><i class='icon-angle-right'></i>服用方式："+take_method
 				+"</li><li><i class='icon-angle-right'></i>是否可用提到药物："+canuse
@@ -557,6 +461,15 @@
 				"</div><div class='amount'></div></div><a href='javascript:void(0)' class='btn red' lang='"+id+"' onclick='removepre(this);'>删除<i class='m-icon-swapright m-icon-white'></i>"+
 				"</a></div>");
 				$str.appendTo($("#appendpre"));
+				//设定每个药品详细的位置,一行四个，设定下一行的左边距
+				$(".span3").each(function(index){
+					if (index >= 4){
+						$(this).css("margin-top","15px");
+						if (index % 4 == 0){
+							$(this).css({"margin-left":"0px"});
+						}
+					}
+				});
 			});
 						
 			//日期处理

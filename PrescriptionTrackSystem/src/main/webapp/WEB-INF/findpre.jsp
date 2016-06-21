@@ -50,36 +50,6 @@
 				<!-- END RESPONSIVE MENU TOGGLER -->
 				<!-- BEGIN TOP NAVIGATION MENU -->
 				<ul class="nav pull-right">
-					<li class="dropdown" id="header_inbox_bar"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="icon-envelope"></i> <span class="badge">3</span>
-					</a>
-						<ul class="dropdown-menu extended inbox">
-							<li>
-								<p>你有三条新消息</p>
-							</li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar2.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">婷心</span>
-										<span class="time">刚刚</span>
-								</span> <span class="message"> 干啥子 </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar3.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">智利</span>
-										<span class="time">16 分钟前</span>
-								</span> <span class="message"> 你在干啥 </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar1.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">波里</span>
-										<span class="time">2小时前</span>
-								</span> <span class="message"> 长沙理工大学 </span>
-							</a></li>
-							<li class="external"><a href="#">查看所有信息 <i
-									class="m-icon-swapright"></i></a></li>
-						</ul></li>
-					<!-- END INBOX DROPDOWN -->
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 					<li class="dropdown user"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <img alt=""
@@ -95,8 +65,8 @@
 							<li><a href="#"><i class="icon-envelope"></i> 我的消息(3)</a></li>
 							<li><a href="#"><i class="icon-tasks"></i> 我的任务(4)</a></li>
 							<li class="divider"></li>
-							<li><a href=""><i class="icon-lock"></i> 关闭系统</a></li>
-							<li><a href="doctorLogout"><i class="icon-key"></i> 退出</a></li>
+							<li><a href="#"><i class="icon-lock"></i> 关闭系统</a></li>
+							<li><a href="${pageContext.request.contextPath }/doctorLogout"><i class="icon-key"></i> 退出</a></li>
 						</ul></li>
 					<!-- END USER LOGIN DROPDOWN -->
 				</ul>
@@ -227,7 +197,7 @@
 									</div>
 									<div class="timeline-icon"><i class="icon-time"></i></div>
 									<div class="timeline-body">
-										 <h2>
+										 <h4>
 										 	 <span style="display: none;">${prescription.user.id }</span>
 										 	 <span>姓名：${prescription.user.name }&nbsp;&nbsp;</span>
 											 <span>医师姓名：${prescription.doctor.name }&nbsp;&nbsp;</span>
@@ -238,12 +208,12 @@
 													<i class="icon-trash icon-white"></i>
 													<span>删除</span>
 												</button>
-											 </a>											 
-										</h2>
-										<div class="timeline-content">
-											<a href="${pageContext.request.contextPath }/updatePre/${prescription.id }" style="float:right;display: inline;" class="btn purple big">
-												修改<i class="m-icon-big-swapright m-icon-white"></i>
+											 </a>										 
+											 <a style="float: right;margin-top: -0px;" href="${pageContext.request.contextPath }/updatePre/${prescription.id }" style="float:right;display: inline;" class="btn green">
+												修改
 											</a>
+										</h4>
+										<div class="timeline-content">
 											<c:forEach items="${prescription.prescriptionDetails }" var="pre">
 												<p>药品名字：${pre.medicine.name} ,&nbsp;&nbsp; 数量:${pre.count },
 												单位:${pre.unit },服用方式：${pre.takemethod }</p>
@@ -295,25 +265,14 @@
 			</span>
 		</div>
 	</div>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery-1.10.1.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery-migrate-1.2.1.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery-ui-1.10.1.custom.min.js"
-		type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"
-		type="text/javascript"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.slimscroll.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.blockui.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.cookie.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.uniform.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.blockui.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.uniform.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/app.js"></script>
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
@@ -322,18 +281,17 @@
 		var uid;//保存用户的id编号
 		jQuery(document).ready(function() {
 			App.init();
+			//时间轴处方颜色赋值
 			var colors = ['timeline-yellow','timeline-blue','timeline-green','timeline-purple','timeline-red','timeline-grey'];
 			$(".timeline").find("li").each(function(index){
 				$(this).attr({"class":index > colors.length ? colors[(index) % colors.length] : colors[index]});
 			});
-			var btn_colors = ['btn purple big','btn white big','btn black big','btn green big','btn blue big','btn yellow big','btn red big','btn grey big']
-			$(".timeline-content").find("a").each(function(index){
-				$(this).attr({"class":index > btn_colors.length ? btn_colors[(index) % btn_colors.length] : btn_colors[index]});
-			});
+ 			//确认删除处方数据
 			$("#deletePre").click(function(){
 				window.location.href = window.location.pathname.substring(0,25) + "deletePre/"+pid+"/"+uid;
 			});
 		});
+		//删除处方的函数，pid用于记录处方的唯一编号，uid记录当前用户的唯一id
 		function deletePre(item){
 			pid = $(item).attr("lang").trim();
 			uid = $(item).parent().find("span:first").text().trim();

@@ -34,8 +34,8 @@
 	rel="stylesheet" type="text/css" media="screen" />
 <link href="${pageContext.request.contextPath}/css/jquery.easy-pie-chart.css"
 	rel="stylesheet" type="text/css" media="screen" />
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/image/favicon.ico" />
+<link href="${pageContext.request.contextPath}/css/jqueryui/asDatepicker.css"
+	rel="stylesheet" type="text/css" media="screen" />	
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
@@ -56,36 +56,6 @@
 				<!-- END RESPONSIVE MENU TOGGLER -->
 				<!-- BEGIN TOP NAVIGATION MENU -->
 				<ul class="nav pull-right">
-					<li class="dropdown" id="header_inbox_bar"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="icon-envelope"></i> <span class="badge">3</span>
-					</a>
-						<ul class="dropdown-menu extended inbox">
-							<li>
-								<p>你有三条新消息</p>
-							</li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar2.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">婷心</span>
-										<span class="time">刚刚</span>
-								</span> <span class="message"> 干啥子 </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar3.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">智利</span>
-										<span class="time">16 分钟前</span>
-								</span> <span class="message"> 你在干啥 </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										src="${pageContext.request.contextPath}/image/avatar1.jpg"
-										alt="" /></span> <span class="subject"> <span class="from">波里</span>
-										<span class="time">2小时前</span>
-								</span> <span class="message"> 长沙理工大学 </span>
-							</a></li>
-							<li class="external"><a href="#">查看所有信息 <i
-									class="m-icon-swapright"></i></a></li>
-						</ul></li>
-					<!-- END INBOX DROPDOWN -->
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 					<li class="dropdown user"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <img alt=""
@@ -102,14 +72,11 @@
 							<li><a href="#"><i class="icon-tasks"></i> 我的任务(4)</a></li>
 							<li class="divider"></li>
 							<li><a href=""><i class="icon-lock"></i> 关闭系统</a></li>
-							<li><a href="doctorLogout"><i class="icon-key"></i> 退出</a></li>
+							<li><a href="${pageContext.request.contextPath }/doctorLogout"><i class="icon-key"></i> 退出</a></li>
 						</ul></li>
-					<!-- END USER LOGIN DROPDOWN -->
 				</ul>
-				<!-- END TOP NAVIGATION MENU -->
 			</div>
 		</div>
-		<!-- END TOP NAVIGATION BAR -->
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
@@ -123,13 +90,12 @@
 					<div class="sidebar-toggler hidden-phone"></div> <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 				</li>
 				<li>
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
 					<form class="sidebar-search" action="findPreByAll" method="post">
 						<div class="input-box">
 							<input type="text" name="search" placeholder="查询..." /> <input
 								type="button" class="submit" />
 						</div>
-					</form> <!-- END RESPONSIVE QUICK SEARCH FORM -->
+					</form>
 				</li>
 				<li class="start active "><a href="${pageContext.request.contextPath}/index"> <i
 						class="icon-home"></i> <span class="title">主页</span> <span
@@ -151,12 +117,10 @@
 						<li><a href="#"> 操作2</a></li>
 					</ul></li>
 			</ul>
-			<!-- END SIDEBAR MENU -->
 		</div>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
-			<!-- BEGIN PAGE CONTAINER-->
 			<div class="container-fluid">
 				<!-- BEGIN PAGE HEADER-->
 				<div class="row-fluid">
@@ -214,7 +178,7 @@
 				<!-- BEGIN INLINE NOTIFICATIONS PORTLET-->
 						<div class="portlet box blue">
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-cogs"></i>修改处方信息</div>
+								<div class="caption"><i class="icon-cogs"></i>修改 ${prescription.user.name} 的处方信息</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="javascript:;">
@@ -225,42 +189,44 @@
 							</div>
 							<div class="portlet-body">
 								<div class="row-fluid">
-									<c:forEach items="${prescription.prescriptionDetails }" var="pre">
+									<c:forEach items="${prescription.prescriptionDetails }" var="detail">
 									<div class="span3 detail">
 										<!-- BEGIN Portlet PORTLET-->
 										<div class="portlet box green">
 											<div class="portlet-title">
-												<div class="caption"><i class="icon-reorder"></i>${pre.medicine.name }</div>
+												<div style="display: inline;font-size: 14px;">
+													${detail.medicine.name }
+												</div>
 												<div class="tools">
 													<a href="javascript:;" class="collapse" ></a>
-													<a data-toggle="modal" href="${pageContext.request.contextPath }/#myModal1" class="icon-remove"
-													onclick="deletePreDetail(this)"></a>
+													<a data-toggle="modal" href="${pageContext.request.contextPath }/#myModal1" class="delete"
+													onclick="deletePreDetail(this)" lang="${detail.id}"></a>
 												</div>
 											</div>
 											<div class="portlet-body">
-												<form action="#">
+												<div>
 													<div class="modal-body">
 														<div class="control-group">
 															<div class="m-wrap">
-															数量:<input type="text" id="count" value="${pre.count }" maxlength="2" name="count"
+															数量:&nbsp;&nbsp;<input type="text" id="count" value="${detail.count }" maxlength="2" name="count"
 																	class="span6" style="width: 30px;" />
 															</div>
 														</div>
-														<div class="control-group">
-															是否可用替代药品：
+														<div class="control-gr">
+															可用替代药品：
 															<select class="span5" id="canuse" tabindex="1" name="canuse">
-																<c:if test="${pre.canuse == '是' }">
+																<c:if test="${detail.canuse == '是' }">
 																	<option selected="selected" value="是">是</option>
 																	<option value="否">否</option>
 																</c:if>
-																<c:if test="${pre.canuse == '否' }">
+																<c:if test="${detail.canuse == '否' }">
 																	<option value="是">是</option>
 																	<option selected="selected" value="否">否</option>
 																</c:if>
 															</select>
 														</div>
 														单位
-														<select class="span4" lang="${pre.unit }" id="unit" name="unit" tabindex="0">
+														<select class="span4" lang="${detail.unit }" id="unit" name="unit" tabindex="0">
 															<option value="盒">盒</option>
 															<option value="片">片</option>
 															<option value="包">包</option>
@@ -276,28 +242,47 @@
 														<div class="control-group">
 															<label class="control-label">服用方式</label>
 															<div class="controls">
-																<input type="text" id="take_method" name="take_method" value=${pre.takemethod }
-																	class="span16" />
+																<input type="text" id="take_method" name="take_method" value=${detail.takemethod }
+																	class="span12" />
 															</div>
 														</div>
 													</div>
 													<div>
-														<button type="submit" class="btn green">保存修改</button>
+														<button lang=${detail.id } onclick="saveDetail(this);" class="btn green">保存修改</button>
 													</div>
-												</form>
+												</div>
 											</div>
 										</div>
 										<!-- END Portlet PORTLET-->
 									</div>
 									</c:forEach>
+									<!-- BEGIN Portlet PORTLET-->
+									<div class="portlet box yellow">
+										<div class="portlet-title">
+											<div style="display: inline;font-size: 14px;">
+												${prescription.user.name } 处方信息修改
+											</div>
+											<div class="tools">
+												<a href="javascript:;" class="collapse" ></a>
+											</div>
+										</div>
+										<div class="portlet-body">
+											<label class="control-label">
+												结束日期：<input name="enddate" value=${prescription.enddate } id="enddate" type="text"/>
+											</label>
+											<label class="control-label">抓取次数</label>
+											<input type="text" value=${prescription.crawlagainst } name="crawlagainst" class="span2" />
+											<br>
+											<button lang=${prescription.id } onclick="savePre(this);" class="btn green">保存修改</button>
+										</div>
+									</div>
 								</div>				
 							</div>
 						</div>
-						<!-- END INLINE NOTIFICATIONS PORTLET-->
+					<!-- END INLINE NOTIFICATIONS PORTLET-->
 			</div>
 		</div>
 	</div>
-	
 	
 	<!-- 模态框，确认删除 -->
 	<div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -310,11 +295,9 @@
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-			<button id="deletePre"  data-dismiss="modal" class="btn red">确定</button>
+			<button id="deletePreDetail"  data-dismiss="modal" class="btn red">确定</button>
 		</div>
 	</div>
-	
-	
 	<div class="footer">
 		<div class="footer-inner">2013 &copy; Silence 940109</div>
 		<div class="footer-tools">
@@ -322,26 +305,94 @@
 			</span>
 		</div>
 	</div>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery-1.10.1.min.js"
-		type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.easy-pie-chart.js"
-		type="text/javascript"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.sparkline.min.js"
-		type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/app.js"
-		type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/index.js"
-		type="text/javascript"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/daterangepicker.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.easy-pie-chart.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.sparkline.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/app.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/index.js" type="text/javascript"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/daterangepicker.js"></script>
 	<script src="${pageContext.request.contextPath}/js/form-components.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jqueryui/jquery.hDialog.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jqueryui/jquery-asDatepicker.js" type="text/javascript"></script>
+</body>
 	<script>
+		//保存更新处方信息
+		function savePre(item){
+			var $enddate = $(item).parent().find("#enddate");//获取结束日期
+			var $crawlagainst = $(item).parent().find('.span2');//获取可抓取次数
+			var id = $(item).attr("lang").trim();
+			//验证正整数
+			if (!/^\+?[1-9][0-9]*$/.test($crawlagainst.val().trim())){
+				$.tooltip(' 请输入正确的数字,该数字不能小于1！', 2000, false);
+				$crawlagainst.val("");
+				$crawlagainst.focus();
+				return;
+			}
+			//验证时间格式
+			if (!/^201(\d{1})\/(\d{2})\/(\d{2})$/.test($enddate.val().trim())){
+				$.tooltip('请选择正确的时间格式！', 2000, false);
+				$enddate.val("");
+				$enddate.focus();
+				return;
+			}
+			$.ajax({
+				type:"post",
+				data:{"enddate":$enddate.val().trim(),"crawlagainst":$crawlagainst.val().trim(),"id":id},
+				url:window.location.pathname.substring(0,25)+"updatePrescription",
+				success:function(data){
+					if (data){						
+						$.tooltip('保存成功成功！', 2000, true);
+					}else{
+						$.tooltip('删除失败，请检查服务器或网络状态！', 2000, false);	
+					}
+				},
+				error:function(){
+					$.tooltip('删除失败，请检查服务器或网络状态！', 2000, false);
+				}
+			});
+		}
+		
+		var pdid;//保存处方详细的id
+		var $tmp;//用于保存当前删除的对象的引用
+		//保存更新处方详细信息
+		function saveDetail(item){
+			var pdid = $(item).attr("lang").trim();//处方详细唯一编号
+			var $count;//数量
+			var canuse;//是否可用替代药品
+			var unit;//实用药品单位
+			var take_method;//服用方法
+			//遍历找到一个处方详细的信息
+			$(item).parent().parent().find(".modal-body").each(function(index){
+				$count = $(this).find("#count");
+				canuse = $(this).find("#canuse").find("option:selected").val().trim();
+				unit = $(this).find("#unit").val().trim();
+				take_method = $(this).find("#take_method").val().trim();
+			});
+			if (!/^\+?[1-9][0-9]*$/.test($count.val().trim())){
+				$.tooltip(' 请输入正确的数字,该数字不能小于1！', 2000, false);
+				$count.val("1").focus();
+				return;
+			}
+			//发送ajax保存处方详细信息
+			$.ajax({
+				type:"POST",
+				data:{"id":pdid,"count":$count.val().trim(),"canuse":canuse,"unit":unit,"takemethod":take_method},
+				url:window.location.pathname.substring(0,25)+"saveUpdateDetail",
+				success:function(data){
+					if (data){						
+						$.tooltip('保存成功成功！', 2000, true);
+					}else{
+						$.tooltip('删除失败，请检查服务器或网络状态！', 2000, false);	
+					}
+				},
+				error:function(){
+					$.tooltip('删除失败，请检查服务器或网络状态！', 2000, false);
+				}
+			});
+		}
 		jQuery(document).ready(function() {
+			$("#enddate").asDatepicker();
 			App.init();
 			//在下拉框中选择药品的单位
 			$(".span4").each(function(index){
@@ -353,10 +404,50 @@
 					}
 				});
 			});
+			//设定每个药品详细的位置,一行四个，设定下一行的左边距
+			$(".span3").each(function(index){
+				if ((index + 1) % 5 == 0){
+					$(this).css({"margin-left":"0px"});
+				}
+			});
 			//给每个处方详细分配颜色
-			var colors = ['portlet box green','portlet box red','portlet box yellow','portlet box blue','portlet box black','portlet box purple','portlet box grey']
+			var colors = ['portlet box green','portlet box red','portlet box yellow','portlet box purple','portlet box blue','portlet box grey']
 			$(".detail").each(function(index){
 				$(this).find("div:first").attr("class",colors[index > colors.length ? (index + 1) % colors.length:index]);
 			});
+			//确认删除处方详细数据
+			$("#deletePreDetail").click(function(){
+			    $.ajax({
+					type:"POST",
+					data:null,
+					url:window.location.pathname.substring(0,25)+"deletePreDetail/"+pdid,
+					success:function(data){
+						if (data){
+							$tmp.closest(".span3").remove();
+							//重新控制每个药品的距离
+						    $(".span3").each(function(index){
+						    	if ((index + 1) % 4 == 0){
+									$(this).css({"margin-left":"25px"});
+								}
+						    	if (index > 3 && index % 4 == 0){
+						    		$(this).css({"margin-left":"0px"});
+						    	}
+							});
+							$.tooltip('删除成功！', 2000, true);
+						}else{
+							$.tooltip('无法完成删除！', 2000, false);
+						}
+					},
+					error:function(){
+						$.tooltip('无法完成删除，请检网络是否通畅！', 2000, false);
+					}
+				});
+			});
 		});
+		//删除处方详细的函数，pdid用于保存处方详细的编号
+		function deletePreDetail(item){
+			pdid = $(item).attr("lang");
+			$tmp = $(item);
+		}
 	</script>
+</html>
