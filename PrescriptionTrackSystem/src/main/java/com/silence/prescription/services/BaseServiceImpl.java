@@ -61,4 +61,12 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public List<T> get(Integer id) {
 		return null;
 	}
+
+	public List<Object[]> get() {
+		return null;
+	}
+
+	public List<Object[]> get(T t) {
+		return null;
+	}
 }

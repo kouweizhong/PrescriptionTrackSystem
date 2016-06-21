@@ -20,6 +20,10 @@ public interface BaseService<T> {
 	
 	public void delete(Integer id);
 	
+	public List<Object []> get();
+	
+	public List<Object []> get(T t);
+	
 	public void update(T t);
 	
 	public Long count();
