@@ -122,6 +122,11 @@ public class User {
 		this.policyNumber = policyNumber;
 	}
 
+	public User(String telephone) {
+		super();
+		this.telephone = telephone;
+	}
+
 	public User() {
 		super();
 	}	
