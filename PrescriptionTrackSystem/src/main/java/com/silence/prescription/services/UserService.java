@@ -35,5 +35,8 @@ public class UserService extends BaseServiceImpl<User>{
 	public List<Object[]> findByYeayMontheDay(){
 		return userDao.findByYearMonthdayDay();
 	}
-
+	@Override
+	public User exist(User t) {
+		return userDao.exist(t.getTelephone());
+	}
 }
