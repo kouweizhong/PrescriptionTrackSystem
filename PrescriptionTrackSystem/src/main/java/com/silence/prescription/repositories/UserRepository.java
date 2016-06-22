@@ -38,4 +38,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	//查询用户的出生年份，月份，日期
 	@Query(value="select left(birthday,4),substring(birthday,6,2),substring(birthday,9,2) from user",nativeQuery=true)
 	public List<Object[]> findByYearMonthdayDay();
+
+	//根据用户的电话号码判断是否存在
+	@Query("from User u where u.telephone = :telephone")
+	public User exist(@Param("telephone") String telephone);
+	
 }
