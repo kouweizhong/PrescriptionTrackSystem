@@ -30,4 +30,6 @@ public interface BaseService<T> {
 	
 	public List<T> findPage(int page,int pageSize);
 	
+	public T exist(T t);
+	
 }

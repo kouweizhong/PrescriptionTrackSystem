@@ -69,4 +69,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public List<Object[]> get(T t) {
 		return null;
 	}
+
+	public T exist(T t) {
+		return null;
+	}
+
 }
