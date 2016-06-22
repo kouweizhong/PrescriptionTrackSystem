@@ -26,7 +26,7 @@ public class DoctorHandler {
 	public String logout(){
 		return "forword:login.html";
 	}
-	
+
 	/*
 	 * 跳转到主页面
 	 */
