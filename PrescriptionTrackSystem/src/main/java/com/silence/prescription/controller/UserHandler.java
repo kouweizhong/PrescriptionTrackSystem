@@ -143,4 +143,17 @@ public class UserHandler {
 	public String addUser(){
 		return "adduser";
 	}
+	/*
+	 * 检查电话号码是否存在
+	 */
+	@RequestMapping(value="/checkExistTelephone",method=RequestMethod.POST)
+	public void checkTelephone(@RequestParam("telephone") String telephone,
+			PrintWriter writer){
+		User user = new User(telephone);
+		if (userService.exist(user) == null){
+			writer.print(1);
+			return;
+		}
+		writer.print(0);
+	}
 }
