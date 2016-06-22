@@ -46,7 +46,7 @@
 		<div class="navbar-inner">
 			<div class="container-fluid">
 				<!-- BEGIN LOGO -->
-				<a class="brand" href="doctorLogin"> 处方跟踪系统 </a>
+				<a class="brand" href="#"> 处方跟踪系统 </a>
 				<!-- END LOGO -->
 				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 				<a href="javascript:;" class="btn-navbar collapsed"
@@ -135,45 +135,6 @@
 				<!-- BEGIN PAGE HEADER-->
 				<div class="row-fluid">
 					<div class="span12">
-						<!-- BEGIN STYLE CUSTOMIZER -->
-						<div class="color-panel hidden-phone">
-							<div class="color-mode-icons icon-color"></div>
-							<div class="color-mode-icons icon-color-close"></div>
-							<div class="color-mode">
-								<p>主题颜色</p>
-								<ul class="inline">
-									<li class="color-black current color-default"
-										data-style="default"></li>
-									<li class="color-blue" data-style="blue"></li>
-									<li class="color-brown" data-style="brown"></li>
-									<li class="color-purple" data-style="purple"></li>
-									<li class="color-grey" data-style="grey"></li>
-									<li class="color-white color-light" data-style="light"></li>
-								</ul>
-								<label> <span>布局</span> <select
-									class="layout-option m-wrap small">
-										<option value="fluid" selected>流式布局</option>
-										<option value="boxed">盒子布局</option>
-								</select>
-								</label> <label> <span>头部</span> <select
-									class="header-option m-wrap small">
-										<option value="fixed" selected>固定</option>
-										<option value="default">默认</option>
-								</select>
-								</label> <label> <span>侧边栏</span> <select
-									class="sidebar-option m-wrap small">
-										<option value="fixed">固定</option>
-										<option value="default" selected>默认</option>
-								</select>
-								</label> <label> <span>底部</span> <select
-									class="footer-option m-wrap small">
-										<option value="fixed">固定</option>
-										<option value="default" selected>默认</option>
-								</select>
-								</label>
-							</div>
-						</div>
-						<!-- END BEGIN STYLE CUSTOMIZER -->
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">处方信息管理系统</h3>
 						<ul class="breadcrumb">
@@ -212,7 +173,7 @@
 									<div class="control-group">
 										<label class="control-label">电话号码</label>
 										<div class="controls">
-											<input type="text" id="telephone" name="telephone" class="span6" />
+											<input type="text" id="telephone" name="telephone" class="span6" onblur="checkTelephone(this);"/>
 										</div>
 									</div>
 									<div class="control-group">
@@ -296,48 +257,15 @@
 	<script src="${pageContext.request.contextPath}/js/bootstrap-modalmanager.js" type="text/javascript" ></script> 
 	<script src="${pageContext.request.contextPath}/js/app.js"></script>
 	<script src="${pageContext.request.contextPath}/js/form-components.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jqueryui/jquery.hDialog.min.js" type="text/javascript"></script>    
+	<script src="${pageContext.request.contextPath}/js/jqueryui/jquery.hDialog.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/system/adduser.js" type="text/javascript"></script>    
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
 		jQuery(document).ready(function() {       
 		   // initiate layout and plugins
 		   App.init();
 		   FormComponents.init();
-		   $("#polictNumber").click(function(){
-			   $(this).val(guid());
-		   });
-		   $("#addUser").click(function(){
-			   var $name = $("#name");
-			   var $telephone = $("#telephone");
-			   var $birthday = $("#birthday");
-			   if ($name.val() == ""){
-				   $.tooltip('名字还没填呢！', 2000, false);
-				   $name.focus();
-				   return false;
-			   }
-			   if ($telephone.val() == ""){
-				   $.tooltip('手机号码还没填呢！', 2000, false);
-				   $telephone.focus();
-				   return false;
-			   }
-			   if (!$telephone.val().match(/^(((13[0-9]{1})|159|153)+\d{8})$/)){
-				   $.tooltip('手机号码格式错误！', 2000, false);
-				   $telephone.focus();
-				   return false;
-			   }
-			   if ($birthday.val() == ""){
-				   $.tooltip('日期还没填呢！', 2000, false);
-				   $birthday.focus();
-				   return false;
-			   }
-		   });
 		});
-		function S4() {
-			   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-			};
-		function guid() {
-		   return (S4()+S4()+S4()+S4()+S4()+S4()+S4()+S4());
-		};
 	</script>
 </body>
 <!-- END BODY -->

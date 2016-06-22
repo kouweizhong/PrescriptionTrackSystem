@@ -39,7 +39,7 @@
 		<div class="navbar-inner">
 			<div class="container-fluid">
 				<!-- BEGIN LOGO -->
-				<a class="brand" href="doctorLogin"> 处方跟踪系统 </a>
+				<a class="brand" href="#"> 处方跟踪系统 </a>
 				<!-- END LOGO -->
 				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 				<a href="javascript:;" class="btn-navbar collapsed"
@@ -124,46 +124,7 @@
 			<div class="container-fluid">
 				<!-- BEGIN PAGE HEADER-->
 				<div class="row-fluid">
-					<div class="span12">
-						<!-- BEGIN STYLE CUSTOMIZER -->
-						<div class="color-panel hidden-phone">
-							<div class="color-mode-icons icon-color"></div>
-							<div class="color-mode-icons icon-color-close"></div>
-							<div class="color-mode">
-								<p>主题颜色</p>
-								<ul class="inline">
-									<li class="color-black current color-default"
-										data-style="default"></li>
-									<li class="color-blue" data-style="blue"></li>
-									<li class="color-brown" data-style="brown"></li>
-									<li class="color-purple" data-style="purple"></li>
-									<li class="color-grey" data-style="grey"></li>
-									<li class="color-white color-light" data-style="light"></li>
-								</ul>
-								<label> <span>布局</span> <select
-									class="layout-option m-wrap small">
-										<option value="fluid" selected>流式布局</option>
-										<option value="boxed">盒子布局</option>
-								</select>
-								</label> <label> <span>头部</span> <select
-									class="header-option m-wrap small">
-										<option value="fixed" selected>固定</option>
-										<option value="default">默认</option>
-								</select>
-								</label> <label> <span>侧边栏</span> <select
-									class="sidebar-option m-wrap small">
-										<option value="fixed">固定</option>
-										<option value="default" selected>默认</option>
-								</select>
-								</label> <label> <span>底部</span> <select
-									class="footer-option m-wrap small">
-										<option value="fixed">固定</option>
-										<option value="default" selected>默认</option>
-								</select>
-								</label>
-							</div>
-						</div>
-						<!-- END BEGIN STYLE CUSTOMIZER -->
+					<div class="span12">						
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">处方信息管理系统</h3>
 						<ul class="breadcrumb">

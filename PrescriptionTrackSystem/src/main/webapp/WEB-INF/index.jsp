@@ -34,7 +34,7 @@
 		<div class="navbar-inner">
 			<div class="container-fluid">
 				<!-- BEGIN LOGO -->
-				<a class="brand" href="doctorLogin">
+				<a class="brand" href="#">
 					处方跟踪系统
 				</a>
 				<!-- END LOGO -->
@@ -137,51 +137,6 @@
 				<!-- BEGIN PAGE HEADER-->
 				<div class="row-fluid">
 					<div class="span12">
-						<!-- BEGIN STYLE CUSTOMIZER -->
-						<div class="color-panel hidden-phone">
-							<div class="color-mode-icons icon-color"></div>
-							<div class="color-mode-icons icon-color-close"></div>
-							<div class="color-mode">
-								<p>主题颜色</p>
-								<ul class="inline">
-									<li class="color-black current color-default" data-style="default"></li>
-									<li class="color-blue" data-style="blue"></li>
-									<li class="color-brown" data-style="brown"></li>
-									<li class="color-purple" data-style="purple"></li>
-									<li class="color-grey" data-style="grey"></li>
-									<li class="color-white color-light" data-style="light"></li>
-								</ul>
-								<label>
-									<span>布局</span>
-									<select class="layout-option m-wrap small">
-										<option value="fluid" selected>流式布局</option>
-										<option value="boxed">盒子布局</option>
-									</select>
-								</label>
-								<label>
-									<span>头部</span>
-									<select class="header-option m-wrap small">
-										<option value="fixed" selected>固定</option>
-										<option value="default">默认</option>
-									</select>
-								</label>
-								<label>
-									<span>侧边栏</span>
-									<select class="sidebar-option m-wrap small">
-										<option value="fixed">固定</option>
-										<option value="default" selected>默认</option>
-									</select>
-								</label>
-								<label>
-									<span>底部</span>
-									<select class="footer-option m-wrap small">
-										<option value="fixed">固定</option>
-										<option value="default" selected>默认</option>
-									</select>
-								</label>
-							</div>
-						</div>
-						<!-- END BEGIN STYLE CUSTOMIZER -->    
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
 							处方信息管理系统
@@ -323,43 +278,12 @@
 	<script src="${pageContext.request.contextPath}/js/highcharts/custom.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/highcharts/exporting.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/highcharts/highcharts-3d.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/system/index.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(function() {    
 		   App.init();
 		   Index.initMiniCharts();
-		   //显示不同承保部门人数所占的百分比
-		   $.ajax({
-				url : "getData",
-				type : "GET",
-				dataType : 'json',
-				success : function(data) {
-					ColumnChart("#columnchart",data);
-				}
-			});
-			//显示不同年龄段人数的分布
-			$.ajax({
-				type:"get",
-				url:"getCountByAge",
-				success:function(data){
-					data = eval('('+ data + ')');
-					var year = [];
-					var count = [];
-					for (var i = 0; i < data.length; i++){
-						year.push(data[i][1]);
-						count.push(data[i][0]);
-					}
-					showYear("#container",year,count);
-				}
-			});
-			$.ajax({
-				type:"get",
-				url:"findByYeayMontheDay",
-				success:function(d){
-					var s = d.trim();
-					var t = eval('(' + s + ')');
-					showYearMonthDay(t);
-				}
-			});
+		   getAjaxDate();
 		});
 	</script>
 </html>
