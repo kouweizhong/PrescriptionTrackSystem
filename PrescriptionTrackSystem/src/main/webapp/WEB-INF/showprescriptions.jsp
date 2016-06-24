@@ -124,13 +124,14 @@
 							<li>处方管理 <i class="icon-angle-right"></i>
 							</li>
 							<li><a href="addUser">查询用户以及处方信息</a></li>
+							
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
 				<!-- END EXAMPLE TABLE PORTLET-->
 				
 				<!-- BEGIN EXAMPLE TABLE PORTLET-->
-						<div class="portlet box grey">
+						<div class="portlet box green">
 							<div class="portlet-title">
 								<div class="caption"><i class="icon-globe"></i>查询结果如下</div>
 								<div class="actions">
@@ -140,12 +141,13 @@
 										<i class="icon-angle-down"></i>
 										</a>
 										<div id="sample_2_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
-											<label><input type="checkbox" checked data-column="0">姓名</label>
-											<label><input type="checkbox" checked data-column="1">出生日期</label>
-											<label><input type="checkbox" checked data-column="2">电话号码</label>
-											<label><input type="checkbox" checked data-column="3">承保公司</label>
-											<label><input type="checkbox" checked data-column="4">保单号</label>
-											<label><input type="checkbox" checked data-column="5">操作</label>
+											<label><input type="checkbox" checked data-column="0">用户编号</label>
+											<label><input type="checkbox" checked data-column="1">开始时间</label>
+											<label><input type="checkbox" checked data-column="2">结束时间</label>
+											<label><input type="checkbox" checked data-column="3">可抓取次数</label>
+											<label><input type="checkbox" checked data-column="4">用户姓名</label>
+											<label><input type="checkbox" checked data-column="5">医师姓名</label>
+											<label><input type="checkbox" checked data-column="6">操作</label>
 										</div>
 									</div>
 								</div>
@@ -154,124 +156,29 @@
 								<table class="table table-striped table-bordered table-hover table-full-width" id="sample_2">
 									<thead>
 										<tr>
-											<th>姓名</th>
-											<th>出生日期</th>
-											<th class="hidden-480">电话号码</th>
-											<th class="hidden-480">承保公司</th>
-											<th class="hidden-480">保单号</th>
-											<th class="hidden-480">操作</th>
+											<th>用户编号</th>
+											<th>开始时间</th>
+											<th>结束时间</th>
+											<th>可抓取药次数</th>
+											<th class="hidden-480">用户姓名</th>
+											<th class="hidden-480">医师姓名</th>
+											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
-									<c:forEach var="user" items="${users }">
+									<c:forEach var="prescription" items="${prescriptions }">
 									<tr>
-										<td>${user.name }</td>
-										<td>${user.birthday }</td>
-										<td class="hidden-480">${user.telephone }</td>
-										<td class="hidden-480">${user.insuranceCompany }</td>
-										<td class="hidden-480">${user.policyNumber }</td>
-										<td>
-											<div class="btn-group">
-												<a class="btn yellow" href="#" data-toggle="dropdown"> <i
-													class="icon-suser"></i>用户操作 <i class="icon-angle-down"></i>
-												</a>
-												<ul class="dropdown-menu">
-													<li><a data-toggle="modal" href="#stack1" onclick="edit(this);" lang="${user.id}"
-														class="btn green"> <i class="icon-pencil"></i>编辑
-													</a></li>
-													<li><a href="#myModal1" lang=${user.id }  data-toggle="modal" 
-														onclick="deleteUser(this)" class="btn red">
-															<i class="icon-trash"></i>删除
-													</a></li>
-													<li><a href="javascript:void(0)" lang=${user.id }
-														onclick="findPre(this)" class="btn blue"> <i
-															class="icon-ban-circle"></i>处方记录
-													</a></li>
-												</ul>
-											</div>
-										</td>
+										<td>${prescription.user.id }</td>
+										<td>${prescription.begindate }</td>
+										<td>${prescription.enddate}</td>
+										<td>${prescription.crawlagainst }</td>
+										<td>${prescription.user.name}</td>
+										<td>${prescription.doctor.name}</td>
+										<td><a href="findPre/${prescription.user.id }">处方信息</a></td>
 										</tr>
 									</c:forEach>
 									</tbody>
 								</table>
-								
-								<!-- 模态框，确认删除 -->
-								<div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-										<h3 id="myModalLabel1">确认删除？</h3>
-									</div>
-									<div class="modal-body">
-										<p>删除的数据不可恢复</p>
-									</div>
-									<div class="modal-footer">
-										<button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-										<button id="deleteUser"  data-dismiss="modal" class="btn red">确定</button>
-									</div>
-								</div>
-								<!-- 弹出层，修改用户信息 -->
-								<div id="stack1" class="modal hide fade" tabindex="-1"
-									data-focus-on="input:first">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-hidden="true"></button>
-										<h3>编辑用户信息</h3>
-									</div>
-									<form action="#">
-										<div class="modal-body">
-											<div class="control-group">
-												<label class="control-label">姓名:</label>
-												<div class="controls">
-													<input type="text" id="name" name="name"
-														class="span5" />
-												</div>
-											</div>
-											<div class="control-group">
-												<label class="control-label">出生日期:</label>
-													<div class="controls">
-														<input class="date-picker" id="birthday" name="birthday" type="text" />
-													</div>
-												</div>
-											<div class="control-group">
-												<label class="control-label">电话号码:</label>
-												<div class="controls">
-													<input type="text" id="telephone" name="telephone"
-														class="span5" />
-												</div>
-											</div>
-											<div class="control-group">
-														承保公司
-														<div class="controls">
-															<select name="insuranceCompany" id="insuranceCompany" class="span8 chosen" data-placeholder="选择一个承保公司" tabindex="1">
-																<option value="太平洋承保公司">太平洋承保公司</option>
-																<option value="麦吉丽有保险公司">麦吉丽有保险公司</option>
-																<option value="中国人寿保险(集团)公司">中国人寿保险(集团)公司</option>
-																<option value="中国平安保险(集团)股份有限公司">中国平安保险(集团)股份有限公司</option>
-																<option value="中国人民保险(集团)股份有限公司">中国人民保险(集团)股份有限公司</option>
-																<option value="美国友邦保险有限公司">美国友邦保险有限公司</option>
-																<option value="新华人寿保险股份有限公司">新华人寿保险股份有限公司</option>
-																<option value="泰康人寿保险股份有限公司">泰康人寿保险股份有限公司</option>
-																<option value="阳光保险集团股份有限公司">阳光保险集团股份有限公司</option>
-																<option value="中再集团公司旗下中国大地财产保险股份有限公司">中再集团公司旗下中国大地财产保险股份有限公司</option>
-															</select>
-														</div>
-													</div>
-											<div class="control-group">
-												<label class="control-label">保单号</label>
-												<div class="controls">
-													<input class="span8" type="text" id="polictNumber"
-														name="policyNumber" />
-												</div>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" data-dismiss="modal" class="btn">关闭</button>
-											<button id="updateUser" type="submit"
-												data-dismiss="modal" class="btn red">确定</button>
-										</div>
-									</form>
-								</div>
-								<!-- 弹出层，修改用户信息结束 -->
 							</div>
 						</div>
 						<!-- END EXAMPLE TABLE PORTLET-->
@@ -303,8 +210,6 @@
 	<script src="${pageContext.request.contextPath}/js/app.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/index.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/jqueryui/jquery.hDialog.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/system/users.js" type="text/javascript"></script>
-	
 	<script>
 		jQuery(document).ready(function() {
 			App.init();

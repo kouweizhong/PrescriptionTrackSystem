@@ -42,8 +42,6 @@
 				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 				<img src="${pageContext.request.contextPath}/image/menu-toggler.png" alt="" />
 				</a>          
-				<!-- END RESPONSIVE MENU TOGGLER -->            
-				<!-- BEGIN TOP NAVIGATION MENU -->              
 				<ul class="nav pull-right">
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 					<li class="dropdown user">
@@ -66,9 +64,7 @@
 							<li><a href="${pageContext.request.contextPath }/doctorLogout"><i class="icon-key"></i> 退出</a></li>
 						</ul>
 					</li>
-					<!-- END USER LOGIN DROPDOWN -->
 				</ul>
-				<!-- END TOP NAVIGATION MENU --> 
 			</div>
 		</div>
 		<!-- END TOP NAVIGATION BAR -->
@@ -110,10 +106,8 @@
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
-						<li >
-							<a href="addPre">
-							添加处方</a>
-						</li>						
+						<li ><a href="addPre">添加处方</a></li>
+						<li ><a href="findpres">所有处方</a></li>						
 					</ul>
 				</li>
 				<li class=""><a href="javascript:;"> <i class="icon-user"></i>

@@ -106,7 +106,7 @@
 				</a>
 					<ul class="sub-menu">
 						<li><a href="addPre"> 添加处方</a></li>
-
+						<li ><a href="findpres">所有处方</a></li>
 					</ul></li>
 				<li class=""><a href="javascript:;"> <i class="icon-user"></i>
 						<span class="title">病人信息管理</span> <span class="arrow "></span>
@@ -137,6 +137,7 @@
 							<li>处方管理 <i class="icon-angle-right"></i>
 							</li>
 							<li><a href="addUser">添加处方</a></li>
+							<li ><a href="findpres">所有处方</a></li>		
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>

@@ -104,6 +104,7 @@
 				</a>
 					<ul class="sub-menu">
 						<li><a href="${ pageContext.request.contextPath }/addPre"> 添加处方</a></li>
+						<li ><a href="${ pageContext.request.contextPath }/findpres">所有处方</a></li>		
 					</ul></li>
 				<li class=""><a href="javascript:;"> <i class="icon-user"></i>
 						<span class="title">病人信息管理</span> <span class="arrow "></span>
@@ -235,6 +236,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.cookie.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.uniform.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/app.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jqueryui/jquery.hDialog.min.js" type="text/javascript"></script>
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
 		
@@ -247,9 +249,10 @@
 			$(".timeline").find("li").each(function(index){
 				$(this).attr({"class":index > colors.length ? colors[(index) % colors.length] : colors[index]});
 			});
+			
  			//确认删除处方数据
 			$("#deletePre").click(function(){
-				window.location.href = window.location.pathname.substring(0,25) + "deletePre/"+pid+"/"+uid;
+				window.location.href = "${pageContext.request.contextPath}/deletePre/"+pid+"/"+uid;
 			});
 		});
 		//删除处方的函数，pid用于记录处方的唯一编号，uid记录当前用户的唯一id
