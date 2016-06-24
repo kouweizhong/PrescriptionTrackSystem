@@ -10,7 +10,8 @@ import java.util.Map;
 public class PrescriptionOperator{
 	// 处方属性
 	// 处方详细的集合
-	private Map<Integer, PrescriptionDetailOperator> map = new LinkedHashMap<Integer, PrescriptionDetailOperator>();
+	private Map<Integer, PrescriptionDetailOperator> map = 
+			new LinkedHashMap<Integer, PrescriptionDetailOperator>();
 
 	public Collection<PrescriptionDetailOperator> getPreDetail(){
 		return map.values();
@@ -26,14 +27,9 @@ public class PrescriptionOperator{
 			map.put(id, preDetail);
 		}
 	}
-
 	public void removePreDetail(Integer pid) {
 		if (map.containsKey(pid)){			
 			map.remove(pid);
 		}
-	}
-
-	public void clearCart() {
-		map.clear();
 	}
 }
