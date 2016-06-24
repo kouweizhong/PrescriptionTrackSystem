@@ -22,8 +22,10 @@ function savePre(item){
 		data:{"enddate":$enddate.val().trim(),"crawlagainst":$crawlagainst.val().trim(),"id":id},
 		url:window.location.pathname.substring(0,25)+"updatePrescription",
 		success:function(data){
-			if (data){						
+			if (data.trim() == "1"){						
 				$.tooltip('保存成功成功！', 2000, true);
+			} else if (data.trim() == "2"){
+				$.tooltip('您没有权限修改！', 2000, false);
 			}else{
 				$.tooltip('删除失败，请检查服务器或网络状态！', 2000, false);	
 			}
@@ -61,8 +63,10 @@ function saveDetail(item){
 		data:{"id":pdid,"count":$count.val().trim(),"canuse":canuse,"unit":unit,"takemethod":take_method},
 		url:window.location.pathname.substring(0,25)+"saveUpdateDetail",
 		success:function(data){
-			if (data){						
+			if (data.trim() == "1"){						
 				$.tooltip('保存成功成功！', 2000, true);
+			}else if (data.trim() == "2"){
+				$.tooltip('您没有权限修改！', 2000, false);
 			}else{
 				$.tooltip('删除失败，请检查服务器或网络状态！', 2000, false);	
 			}
@@ -103,7 +107,7 @@ jQuery(document).ready(function() {
 			data:null,
 			url:window.location.pathname.substring(0,25)+"deletePreDetail/"+pdid,
 			success:function(data){
-				if (data){
+				if (data.trim() == "1"){
 					$tmp.closest(".span3").remove();
 					//重新控制每个药品的距离
 				    $(".span3").each(function(index){
@@ -115,6 +119,8 @@ jQuery(document).ready(function() {
 				    	}
 					});
 					$.tooltip('删除成功！', 2000, true);
+				}else if (data.trim() == "2"){
+					$.tooltip('您没有权限修改！', 2000, false);
 				}else{
 					$.tooltip('无法完成删除！', 2000, false);
 				}
