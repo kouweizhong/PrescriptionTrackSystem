@@ -100,11 +100,11 @@ public class UserHandler {
 			Map<String,Object> map){
 		//总共有多少记录
 		Long count = userService.count();
-		count = (count % 8 == 0 ? count / 8 : count / 8 + 1);
+		count = (count % 7 == 0 ? count / 7 : count / 7 + 1);
 		if (page > count){
 			page = count.intValue();
 		}
-		List<User> users = userService.findPage(page, 8);
+		List<User> users = userService.findPage(page, 7);
 		map.put("users", users);
 		map.put("count", count);
 		map.put("page", page);

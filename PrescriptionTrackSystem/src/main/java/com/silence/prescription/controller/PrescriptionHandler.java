@@ -42,6 +42,15 @@ public class PrescriptionHandler {
 	private BaseService<Prescription> prescriptionService;
 	
 	/*
+	 * 查询所所的处方
+	 */
+	@RequestMapping(value="/findpres",method=RequestMethod.GET)
+	public String findPrescriptions(Map<String, Object> map){
+		List<Prescription> prescriptions = prescriptionService.find();
+		map.put("prescriptions", prescriptions);
+		return "showprescriptions";
+	}
+	/*
 	 * 更新处方信息
 	 */
 	@RequestMapping(value="updatePrescription",method=RequestMethod.POST)

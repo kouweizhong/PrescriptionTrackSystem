@@ -18,7 +18,6 @@ public class DoctorHandler {
 
 	@Autowired
 	private BaseService<Doctor> doctorService;
-
 	/*
 	 *退出 
 	 */
@@ -26,7 +25,6 @@ public class DoctorHandler {
 	public String logout(){
 		return "forword:login.html";
 	}
-
 	/*
 	 * 跳转到主页面
 	 */
