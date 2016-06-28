@@ -23,7 +23,7 @@ public class PrescriptionDetail {
 	//该药的单位
 	@Column(length=16)
 	private String unit;
-	@Column(length=128)
+	@Column(length=128,columnDefinition="String default 无建议的服用方式")
 	private String takemethod;
 	@Column(length=16,columnDefinition="String default 否")
 	private String canuse;
