@@ -101,13 +101,16 @@
 						class="icon-home"></i> <span class="title">主页</span> <span
 						class="selected"></span>
 				</a></li>
-				<li class=""><a href="javascript:;"> <i class="icon-cogs"></i>
+				<li class="">
+					<a href="javascript:;"><i class="icon-cogs"></i>
 						<span class="title">处方管理</span> <span class="arrow "></span>
-				</a>
+					</a>
 					<ul class="sub-menu">
 						<li><a href="${pageContext.request.contextPath}/addPre"> 添加处方</a></li>
 						<li ><a href="${ pageContext.request.contextPath }/findpres">所有处方</a></li>
-					</ul></li>
+						<li><a href="${pageContext.request.contextPath }/findPrescriptionsByUserCount">处方用户数量</a></li>
+					</ul>
+				</li>
 				<li class=""><a href="javascript:;"> <i class="icon-user"></i>
 						<span class="title">病人信息管理</span> <span class="arrow "></span>
 				</a>
@@ -277,5 +280,6 @@
 	<script src="${pageContext.request.contextPath}/js/jqueryui/jquery.hDialog.min.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/jqueryui/jquery-asDatepicker.js" type="text/javascript"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/system/checkUpdate.js" ></script>
+	<script src="${pageContext.request.contextPath}/js/system/websocket.js" type="text/javascript"></script>
 </body>
 </html>

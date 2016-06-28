@@ -100,6 +100,7 @@
 					<ul class="sub-menu">
 						<li><a href="addPre"> 添加处方</a></li>
 						<li ><a href="${ pageContext.request.contextPath }/findpres">所有处方</a></li>
+						<li><a href="${pageContext.request.contextPath }/findPrescriptionsByUserCount">处方用户数量</a></li>
 					</ul></li>
 				<li class=""><a href="javascript:;"> <i class="icon-user"></i>
 						<span class="title">病人信息管理</span> <span class="arrow "></span>

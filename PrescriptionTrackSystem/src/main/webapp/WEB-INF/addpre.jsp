@@ -107,6 +107,7 @@
 					<ul class="sub-menu">
 						<li><a href="addPre"> 添加处方</a></li>
 						<li ><a href="findpres">所有处方</a></li>
+						<li><a href="${pageContext.request.contextPath }/findPrescriptionsByUserCount">处方用户数量</a></li>
 					</ul></li>
 				<li class=""><a href="javascript:;"> <i class="icon-user"></i>
 						<span class="title">病人信息管理</span> <span class="arrow "></span>
@@ -261,7 +262,7 @@
 				<div class="control-group">
 					<label class="control-label">是否可用替代药品</label>
 					<div class="controls">
-						<select class="small m-wrap" id="canuse" tabindex="1" name="canuse">
+						<select class="small" id="canuse" tabindex="1" name="canuse">
 							<option value="否">否</option>
 							<option value="是">是</option>
 						</select>
@@ -334,16 +335,14 @@
 	<script src="${pageContext.request.contextPath}/js/bootstrap-modalmanager.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/app.js"></script>
 	<script src="${pageContext.request.contextPath}/js/form-components.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jqueryui/jquery.hDialog.min.js"
-		type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jqueryui/jquery.hDialog.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/system/websocket.js" type="text/javascript"></script>
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
 		jQuery(document).ready(function() {
 			App.init();
 			FormComponents.init();
 		});
-		
 		//移除处方详细信息
 		function removepre(item){
 			var id = $(item).attr("lang");
@@ -379,6 +378,7 @@
 					$enddate.focus();
 					return false;
 				}
+				start("addPre");//实用websocket通知药房
 			});
 			//处方详细添加处理
 			$("#addPrescriptionDetail").click(function() {
