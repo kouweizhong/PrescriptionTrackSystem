@@ -1,14 +1,22 @@
 package com.silence.prescription.interceptors;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.web.config.SpringDataWebConfigurationMixin;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.silence.prescription.entities.Doctor;
+
 public class LoginInterceptor implements HandlerInterceptor {
 
+	private final static Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 	// 调用方法之前调用，做权限，日志，事务
 	//调用管理员的管理方法之前查看用户是否已经登陆
 	public boolean preHandle(HttpServletRequest request,
@@ -19,6 +27,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 		    response.sendRedirect(request.getContextPath()+"/login.html?noLogin=true");
 		    return false;
 		}
+		Doctor doctor = (Doctor) session.getAttribute("doctor");
+		logger.info("execute the " + request.getServletPath().split("/")[1] +
+				" before...!!!,at time " + new Date());
 		/*
 		String params = request.getServletContext().getInitParameter("permission");
 		//permissions保存需要权限访问的路径信息
