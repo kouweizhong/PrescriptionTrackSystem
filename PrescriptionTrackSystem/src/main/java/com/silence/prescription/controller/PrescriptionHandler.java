@@ -1,5 +1,6 @@
 package com.silence.prescription.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -40,7 +42,63 @@ public class PrescriptionHandler {
 	private BaseService<Medicine> medicineService;
 	@Autowired
 	private BaseService<Prescription> prescriptionService;
+
+	/*
+	 *  更新处方可取次数
+	 */
+	@RequestMapping(value="/decreasePrescription",method=RequestMethod.GET)
+	public void decreasePrescription(@RequestParam("id") Integer id,PrintWriter writer){
+		prescriptionService.update(id);
+		writer.print(1);
+	}
 	
+	/*
+	 * 查询一个处方信息
+	 */
+	@RequestMapping(value="/preDetails",method=RequestMethod.GET)
+	public String findPrescriptionDetail(@RequestParam("pid") Integer id,
+			Map<String, Object> map){
+		Prescription prescription = prescriptionService.find(id);
+		map.put("prescription", prescription);
+		return "medicinedrawdetail";
+	}
+	
+	/*
+	 * 获取最新的一个处方信息
+	 */
+	@RequestMapping(value="/findLastPrescription",method=RequestMethod.POST)
+	public void findLastPrescription(HttpServletResponse response) throws IOException{		
+		Prescription prescription = prescriptionService.search();
+		StringBuffer result = new StringBuffer();
+		result.append(prescription.getBegindate()).append(",");
+		result.append(prescription.getId()).append(",");
+		result.append(prescription.getEnddate()).append(",");
+		result.append(prescription.getCrawlagainst()).append(",");
+		result.append(prescription.getUser().getName()).append(",");
+		result.append(prescription.getDoctor().getName()).append(",");
+		result.append(prescription.getId()).append(",");
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().print(result.toString());
+	}
+	
+	/*
+	 * 取药  查询所有处方信息
+	 */
+	@RequestMapping(value="/medicinefindpres",method=RequestMethod.GET)
+	public String mFindPrescriptions(Map<String, Object> map){
+		List<Prescription> prescriptions = prescriptionService.find();
+		map.put("prescriptions", prescriptions);
+		return "medicinedraw";
+	}
+	/*
+	 * 查询每个用户的处方信息以及数量
+	 */
+	@RequestMapping(value="/findPrescriptionsByUserCount",method=RequestMethod.GET)
+	public String findPrescriptionsByUserCount(Map<String, Object> map){
+		List<Object[]> lists = prescriptionService.get();
+		map.put("infos", lists);
+		return "showprecount";
+	}
 	/*
 	 * 查询所所的处方
 	 */
@@ -62,7 +120,6 @@ public class PrescriptionHandler {
 		prescriptionService.update(pre);
 		writer.print(1);
 	}
-	
 	/*
 	 *  根据处方的id编号查询处方信息
 	 *  pid 处方id
