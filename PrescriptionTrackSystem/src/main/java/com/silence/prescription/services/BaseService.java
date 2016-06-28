@@ -6,6 +6,8 @@ public interface BaseService<T> {
 	
 	public void add(T t);
 	
+	public T search();
+	
 	public T find(Integer id);
 	
 	public List<T> find(String[] Param);
@@ -25,6 +27,8 @@ public interface BaseService<T> {
 	public List<Object []> get(T t);
 	
 	public void update(T t);
+	
+	public void update(Integer id);
 	
 	public Long count();
 	

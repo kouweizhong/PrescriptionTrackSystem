@@ -21,5 +21,21 @@ public class PrescriptionService extends BaseServiceImpl<Prescription> {
 	public void update(Prescription prescription) {
 		prescriptionDao.update(prescription.getEnddate(), prescription.getCrawlagainst(), prescription.getId());
 	}
+	@Override
+	public List<Object[]> get() {
+		return prescriptionDao.showUPrescriptionCount();
+	}
+	@Override
+	public Prescription search() {
+		return prescriptionDao.findLastPrescription();
+	}
+	@Override
+	public List<Prescription> find() {
+		return prescriptionDao.find();
+	}
+	@Override
+	public void update(Integer id) {
+		prescriptionDao.decreasePrescription(id);
+	}
 	
 }

@@ -74,4 +74,11 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 		return null;
 	}
 
+	public T search() {
+		return null;
+	}
+
+	public void update(Integer id) {
+		
+	}
 }
