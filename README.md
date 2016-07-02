@@ -29,3 +29,14 @@ Spring Data Jpa是Spring Data对JPA提供的一套解决方案。Spring Data Jpa
 (5)REST风格URL，REST架构风格是全新的针对Web应用的开发风格，是当今世界最成功的互联网超媒体分布式系统架构，它使得人们真正理解了Http协议本来面貌。<br>随着REST架构成为主流技术，一种全新的互联网网络应用开发的思维方式开始流行。
 REST是基于Http协议的，任何对资源的操作行为都是通过Http协议来实现。以往的Web开发大多数用的都是Http协议中的GET和POST方法，对其他方法很少使用，这实际上是因为对Http协议认识片面的理解造成的。Http不仅仅是一个简单的运载数据的协议，而是一个具有丰富内涵的网络软件的协议。他不仅仅能对互联网资源进行唯一定位，而且还能告诉我们如何对该资源进行操作。Http把对一个资源的操作限制在4个方法以内：GET,POST,PUT和DELETE，这正是对资源CRUD操作的实现。由于资源和URI是一一对应的，执行这些操作的时候URI是没有变化的，这和以往的Web开发有很大的区别。正由于这一点，极大的简化了Web开发，也使得URI可以被设计成更为直观的反映资源的结构，这种URI的设计被称作RESTful的URI。基于REST URL风格的请求方式如下：
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/restful.jpg)<br>
+
+##数据库设计
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/uml.jpg)<br>
+表User(用户表)用于保存用户的基本信息
+字段名				数据类型	长度	主键	描述
+Id					Int	11	是	用户编号
+Name				Varchar	64	否	用户姓名
+Telephone			Varchar	20	否	电话号码
+Birthday			Data	10	否	出生日期
+insurance_company	Varchar	32	否	承保公司
+Policy_number		Varchar	64	否	保单号
