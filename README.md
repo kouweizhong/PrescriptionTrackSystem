@@ -32,11 +32,11 @@ REST是基于Http协议的，任何对资源的操作行为都是通过Http协�
 
 ##数据库设计
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/uml.jpg)<br>
-表User(用户表)用于保存用户的基本信息
-字段名				数据类型	长度	主键	描述
-Id					Int	11	是	用户编号
-Name				Varchar	64	否	用户姓名
-Telephone			Varchar	20	否	电话号码
-Birthday			Data	10	否	出生日期
-insurance_company	Varchar	32	否	承保公司
-Policy_number		Varchar	64	否	保单号
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/user.jpg)<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/department.jpg)<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/position.jpg)<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/doctor.jpg)<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/prescription.jpg)<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/prescriptiondetail.jpg)<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/medicine.jpg)<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/subtitute.jpg)<br>
