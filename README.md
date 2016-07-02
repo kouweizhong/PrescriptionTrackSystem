@@ -15,7 +15,7 @@
 (3)处方历史查询，查询所有的处方信息，或者根据用户的信息模糊查询到该用户的处方信息。<br>
 (4)处方药物信息处理，药方根据处方信息处理药物并确认处理。<br>
 ##关键技术
-(1)HTML5 WebSocket API客户端与服务器端进行全双工通讯，WebSocket的出现是基于Web应用的实时性需要而产生的，它允许客户端和服务器在任意时刻互相推送消息。Web Socket是下一代客户端-服务器异步通讯的方法，它本事上任然是一个基于TCP的协议，它使用ws或wss协议，可用于任意的客户端和服务器。为了建立一个 WebSocket 连接，客户端浏览器首先要向服务器发起一个 HTTP 请求，这个请求和通常的 HTTP 请求不同，包含了一些附加头信息，其中附加头信息”Upgrade: WebSocket”(”Upgrade:WebSocket”表示这是一个特殊的 HTTP 请求，请求的目的就是要将客户端和服务器端的通讯协议从 HTTP 协议升级到 WebSocket 协议。)表明这是一个申请协议升级的 HTTP 请求，服务器端解析这些附加的头信息然后产生应答信息返回给客户端，客户端和服务器端的 WebSocket 连接就建立起来了，双方就可以通过这个连接通道自由的传递信息，并且这个连接会持续存在直到客户端或者服务器端的某一方主动的关闭连接。它的通讯方式如下：图4-4-1客户端和服务器websocket通讯。<br>
+(1)HTML5 WebSocket API客户端与服务器端进行全双工通讯，WebSocket的出现是基于Web应用的实时性需要而产生的，它允许客户端和服务器在任意时刻互相推送消息。Web Socket是下一代客户端-服务器异步通讯的方法，它本事上任然是一个基于TCP的协议，它使用ws或wss协议，可用于任意的客户端和服务器。为了建立一个 WebSocket 连接，客户端浏览器首先要向服务器发起一个 HTTP 请求，这个请求和通常的 HTTP 请求不同，包含了一些附加头信息，其中附加头信息”Upgrade: WebSocket”(”Upgrade:WebSocket”表示这是一个特殊的 HTTP 请求，请求的目的就是要将客户端和服务器端的通讯协议从 HTTP 协议升级到 WebSocket 协议。)表明这是一个申请协议升级的 HTTP 请求，服务器端解析这些附加的头信息然后产生应答信息返回给客户端，客户端和服务器端的 WebSocket 连接就建立起来了，双方就可以通过这个连接通道自由的传递信息，并且这个连接会持续存在直到客户端或者服务器端的某一方主动的关闭连接。它的通讯方式如下：图客户端和服务器websocket通讯。<br>
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/websocket.jpg)<br>
-WebSocket图
-
+(2)HighChats一套由纯Javascript写的表现层框架,它提供曲线、面积、柱形图、条形图、饼图、散点图、区域范围图、气泡、漏斗等等一系列的图形表现形式。HighChars不需要像Flash和Java那样需要插件才可以运行，而且运行速度快,它是轻量级的JavaScript脚本，它使用的是json数据格式，数据传输更加方便，而且它的数据是在客户端解析的，减轻了服务器的压力，所以它比JFreeChart更方便(JFreeChart是JAVA平台上的一个开放的图表绘制类库。它完全使用JAVA语言编写在我看来JFreeChart有点笨重了，而且它生成的图形也比HighChart少，并且好像是收费的)。另外HighCharts还有很好的兼容性，能够完美支持当前大多数浏览器。<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/highchart.jpg)<br>
