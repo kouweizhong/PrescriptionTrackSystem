@@ -40,3 +40,31 @@ REST是基于Http协议的，任何对资源的操作行为都是通过Http协�
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/prescriptiondetail.jpg)<br>
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/medicine.jpg)<br>
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/subtitute.jpg)<br>
+##基于注解的类的设计
+package com.silence.prescription.entities;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+@Table(name="department")
+@Entity
+public class Department {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	@Column(length=32,nullable=false)	
+	//部门的名字
+	private String name;
+	//该部门下的医生
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="department",cascade=CascadeType.ALL)
+	private Set<Doctor> doctors = new HashSet<Doctor>();
+	/*省略setter和getter*/
+}
