@@ -161,9 +161,6 @@
 					<div id="columnchart"></div>
 				</div>
 				<div id="showYMD"></div>
-				<div style="width: 80%;height: 100%;margin: 20px auto">
-					<img width="100%" height="100%" src="${pageContext.request.contextPath }/image/system/uml.png">
-				</div>
 			</div>
 		</div>
 	</div>

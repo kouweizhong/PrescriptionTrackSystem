@@ -166,15 +166,15 @@
 											 <span>医师姓名：${prescription.doctor.name }&nbsp;&nbsp;</span>
 											 <span>电话：${prescription.doctor.telephone }&nbsp;&nbsp;</span>
 											 <span>可取药次数：${prescription.crawlagainst }</span>
+											 <a style="float: right;margin-top: -0px;" href="${pageContext.request.contextPath }/updatePre/${prescription.id }" style="float:right;display: inline;" class="btn green">
+												修改
+											</a>
 											 <a data-toggle="modal" lang=${prescription.id } href="#myModal1" onclick="deletePre(this)">
-												 <button style="float: right;margin-top: -0px;" type="button" class="btn red delete">
+												 <button style="float: right;margin-top: -0px;" type="button" class="btn red">
 													<i class="icon-trash icon-white"></i>
 													<span>删除</span>
 												</button>
 											 </a>										 
-											 <a style="float: right;margin-top: -0px;" href="${pageContext.request.contextPath }/updatePre/${prescription.id }" style="float:right;display: inline;" class="btn green">
-												修改
-											</a>
 										</h4>
 										<div class="timeline-content">
 											<c:forEach items="${prescription.prescriptionDetails }" var="pre">

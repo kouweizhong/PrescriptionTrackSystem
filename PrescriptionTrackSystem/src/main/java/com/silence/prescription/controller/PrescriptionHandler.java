@@ -44,6 +44,15 @@ public class PrescriptionHandler {
 	private BaseService<Prescription> prescriptionService;
 
 	/*
+	 * 根据处方的id号查询可取药次数
+	 */
+	@RequestMapping(value="/findCrawlagainstById",method=RequestMethod.POST)
+	public void getCrawlagainstById(@RequestParam("id") Integer id,PrintWriter writer){
+		Prescription prescription = prescriptionService.find(id);
+		writer.print(prescription.getCrawlagainst());
+	}
+	
+	/*
 	 *  更新处方可取次数
 	 */
 	@RequestMapping(value="/decreasePrescription",method=RequestMethod.GET)
@@ -76,7 +85,7 @@ public class PrescriptionHandler {
 		result.append(prescription.getCrawlagainst()).append(",");
 		result.append(prescription.getUser().getName()).append(",");
 		result.append(prescription.getDoctor().getName()).append(",");
-		result.append(prescription.getId()).append(",");
+		result.append(prescription.getId());
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().print(result.toString());
 	}

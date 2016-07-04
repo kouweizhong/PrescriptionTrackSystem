@@ -10,22 +10,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name="prescriptiondetail")
 @Entity
+@Table(name="prescriptiondetail")
 public class PrescriptionDetail {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	//该药的数量
-	@Column(length=4,columnDefinition="INT default 1")
+	@Column(length=4)
 	private int count;
 	//该药的单位
 	@Column(length=16)
 	private String unit;
-	@Column(length=128,columnDefinition="String default 无建议的服用方式")
+	@Column(length=128)
 	private String takemethod;
-	@Column(length=16,columnDefinition="String default 否")
+	@Column(length=16)
 	private String canuse;
 	@ManyToOne(fetch=FetchType.LAZY,targetEntity=Prescription.class,optional=false)
 	@JoinColumn(name="pid")
