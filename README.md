@@ -41,6 +41,7 @@ REST是基于Http协议的，任何对资源的操作行为都是通过Http协�
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/medicine.jpg)<br>
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/subtitute.jpg)<br>
 ##基于注解的类的设计
+```
 @Table(name="department")<br>
 @Entity<br>
 public class Department {
@@ -210,3 +211,4 @@ public class User {
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="user",cascade=CascadeType.ALL)
 	private Set<Prescription> prescriptions;
 }
+```
