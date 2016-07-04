@@ -42,8 +42,8 @@ REST是基于Http协议的，任何对资源的操作行为都是通过Http协�
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/subtitute.jpg)<br>
 ##基于注解的类的设计
 ```
-@Table(name="department")<br>
-@Entity<br>
+@Table(name="department")
+@Entity
 public class Department {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -56,9 +56,8 @@ public class Department {
 	private Set<Doctor> doctors = new HashSet<Doctor>();
 	/*省略setter和getter*/
 }
-<br>
-@Entity<br>
-@Table(name="doctor")<br>
+@Entity
+@Table(name="doctor")
 public class Doctor {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -85,9 +84,9 @@ public class Doctor {
 	private Set<Prescription> prescriptions;
 	/*省略setter和getter*/
 }
-<br>
+
 @Entity
-@Table(name="medicine")<br>
+@Table(name="medicine")
 public class Medicine {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -107,9 +106,9 @@ public class Medicine {
 	={@JoinColumn(name="s_id")})
 	private Set<Medicine> substitutes = new HashSet<Medicine>();
 }
-<br>
-@Table(name="position")<br>
-@Entity<br>
+
+@Table(name="position")
+@Entity
 public class Position {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -122,15 +121,13 @@ public class Position {
 	@OrderBy(value="id ASC")
 	private Set<Doctor> doctors = new HashSet<Doctor>();
 }
-<br>
-@Entity<br>
-@Table(name="prescription")<br>
-public class Prescription {
 
+@Entity
+@Table(name="prescription")
+public class Prescription {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	
 	@DateTimeFormat(pattern="MM/dd/yyyy")
 	@Temporal(TemporalType.DATE)
 	//处方开始日期
@@ -150,13 +147,12 @@ public class Prescription {
 	@ManyToOne(fetch=FetchType.LAZY,targetEntity=Doctor.class,optional=false)
 	@JoinColumn(name="did")
 	private Doctor doctor;
-	
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="prescription",cascade=CascadeType.ALL)
 	private Set<PrescriptionDetail> prescriptionDetails = new HashSet<PrescriptionDetail>();
 }
-<br>
-@Entity<br>
-@Table(name="prescriptiondetail")<br>
+
+@Entity
+@Table(name="prescriptiondetail")
 public class PrescriptionDetail {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -178,9 +174,9 @@ public class PrescriptionDetail {
 	@JoinColumn(name="mid")
 	private Medicine medicine;
 }
-<br>
-@Entity<br>
-@Table(name="user")<br>
+
+@Entity
+@Table(name="user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -212,3 +208,16 @@ public class User {
 	private Set<Prescription> prescriptions;
 }
 ```
+##运行效果部分截图
+主页<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/index.png)<br>
+添加处方<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/addpre.png)<br>
+基于websocket的消息推送<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/websocket.png)<br>
+时间轴记录处方信息<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/time.png)<br>
+同时修改多个药物信息，都是使用ajax实现<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/update.png)<br>
+用户信息的管理<br>
+![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/user.png)<br>
