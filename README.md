@@ -208,6 +208,77 @@ public class User {
 	private Set<Prescription> prescriptions;
 }
 ```
+##Spring Data Jpa数据访问层接口
+```
+(1)
+@Repository(value="doctoryDao")
+@Transactional(readOnly=true)
+public interface DoctorRepository extends JpaRepository<Doctor, Integer>{
+@Modifying
+@Query("update Doctor d set d.name=:name,d.telephone=:telephone where d.id=:id")
+public void update(@Param("name") String name,@Param("telephone") String telephone,
+@Param("id") Integer id);
+	public Doctor findByNameAndPassword(String name,String password);
+}
+(2)
+@Repository(value="medicineDao")
+@Transactional(readOnly=true)
+public interface MedicineRepository extends JpaRepository<Medicine, Integer>{}
+(3)
+PrescriptionRepository
+@Transactional
+@Repository("prescriptionDao")
+public interface PrescriptionRepository extends JpaRepository<Prescription, Integer>{
+	//根据用户id号查询处方记录
+	public List<Prescription> findPrescriptionsByUserId(Integer id);
+	@Query("from Prescription pre order by pre.id DESC")
+	public List<Prescription> find();
+	//更新处方，减少处方可取次数
+	@Modifying
+	@Query(value="update prescription set crawlagainst = crawlagainst - 1 where id = :id",nativeQuery=true)
+	public void decreasePrescription(@Param("id") Integer id);
+	//更新处方信息
+	@Modifying
+	@Query(value="update Prescription pre set pre.enddate = :enddate,pre.crawlagainst = :crawlagainst where pre.id = :id")
+	public void update(@Param("enddate") Date enddate,@Param("crawlagainst") Integer crawlagainst, @Param("id") Integer id);
+	@Query(value="select u.name,u.policy_number,u.telephone,u.insurance_company,count(*),u.id from prescription p inner join user u where u.id = p.uid group by p.uid",nativeQuery=true)
+	public List<Object[]> showUPrescriptionCount();
+	@Query(value="select * from prescription order by id desclimit 1",nativeQuer=true)
+	public Prescription findLastPrescription();
+}
+(4)
+@Repository(value="prescriptionDetailDao")
+public interface PrescriptionDetailRepository extends JpaRepository<PrescriptionDetail, Integer> {
+	//更新处方详细信息
+	@Transactional@Modifying
+	@Query(value="update PrescriptionDetail detail set detail.count = :count,detail.unit = :unit,detail.takemethod = :takemethod,detail.canuse = :canuse where detail.id = :id")
+	public void updateDetail(@Param("count") Integer count,@Param("unit") String unit, @Param("takemethod") String takemethod,@Param("canuse") String canuse,@Param("id") Integer id);
+}
+(5)
+@Transactional
+@Repository("userDao")
+public interface UserRepository extends JpaRepository<User, Integer>{
+	@Modifying
+	@Query("update User u set u.name = :name,u.birthday = :birthday,u.telephone = :telephone,u.insuranceCompany = :insuranceCompany,u.policyNumber = :policyNumber where u.id = :id")
+	public void update(@Param("name") String name,@Param("birthday") Date birthday, @Param("telephone") String telephone,@Param("insuranceCompany") String insuranceCompany, @Param("policyNumber") String policyNumber,@Param("id") Integer id);
+	//根据搜索关键字查询用户
+	@Query("from User u where concat(u.name,u.birthday,u.telephone,u.insuranceCompany,u.policyNumber) like CONCAT('%',:search,'%')")
+	public List<User> findUserByAll(@Param("search") String search);
+	//根据承保公司计算用户的数量	
+	@Query("select count(*),insuranceCompany from User u group by u.insuranceCompany")
+	public List<Object[]> countUser();
+	//根据不同的年龄段统计用户的数量
+	@Query(value="select count(*),left(birthday,4) from user group by left(birthday,4)",nativeQuery=true)
+	public List<Object[]> findByAgeCount();
+	//查询用户的出生年份，月份，日期
+	@Query(value="selectleft(birthday,4),substring(birthday,6,2),substring(birthday,9,2) from user",nativeQuery=true)
+	public List<Object[]> findByYearMonthdayDay();
+	//根据用户的电话号码判断是否存在
+	@Query("from User u where u.telephone = :telephone")
+	public User exist(@Param("telephone") String telephone);	
+}
+
+```
 ##运行效果部分截图
 主页<br>
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/index.png)<br>
@@ -221,3 +292,4 @@ public class User {
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/update.png)<br>
 用户信息的管理<br>
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/user.png)<br>
+##运行
