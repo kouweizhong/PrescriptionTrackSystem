@@ -41,22 +41,9 @@ REST是基于Http协议的，任何对资源的操作行为都是通过Http协�
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/medicine.jpg)<br>
 ![](https://github.com/silence940109/PrescriptionTrackSystem/blob/master/systemimages/subtitute.jpg)<br>
 ##基于注解的类的设计
-package com.silence.prescription.entities;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-@Table(name="department")
-@Entity
+@Table(name="department")<br>
+@Entity<br>
 public class Department {
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
@@ -67,4 +54,159 @@ public class Department {
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="department",cascade=CascadeType.ALL)
 	private Set<Doctor> doctors = new HashSet<Doctor>();
 	/*省略setter和getter*/
+}
+<br>
+@Entity<br>
+@Table(name="doctor")<br>
+public class Doctor {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	//医师姓名
+	@Column(length=32,nullable=false)
+	private String name;
+	//医师电话
+	@Column(length=32,nullable=false)
+	private String telephone;
+	//登录密码
+	@Column(length=32,nullable=false)
+	private String password;
+	//医师所属的部门
+	@ManyToOne(fetch=FetchType.EAGER,targetEntity=Department.class,optional=false)
+	@JoinColumn(name="did")
+	private Department department;
+	//医师的职位
+	@ManyToOne(fetch=FetchType.EAGER,targetEntity=Position.class,optional=false)
+	@JoinColumn(name="pid")
+	private Position position;	
+	//该医生的处方
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="doctor",cascade=CascadeType.ALL)
+	private Set<Prescription> prescriptions;
+	/*省略setter和getter*/
+}
+<br>
+@Entity
+@Table(name="medicine")<br>
+public class Medicine {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	@Column(length=64,nullable=false)
+	private String name;
+	@Column(length=128)
+	private String sideeffect;
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="medicine",cascade=CascadeType.ALL,targetEntity=PrescriptionDetail.class)
+	private Set<PrescriptionDetail> prescriptionDetails = new HashSet<PrescriptionDetail>();	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	//表关联的方式来映射一对多或者多对多的关系时，要使用@JoinTable这个标记
+	//name属性为连接两个表的表名称
+	//joinColumns属性表示，在保存关系中的表中，所保存关联关系的外键的字段。并配合@JoinColumn标记使用。
+	//inverseJoinColumns属性与joinColumns属性类似，它保存的是保存关系的另一个外键字段
+	@JoinTable(name="subtitute",joinColumns={@JoinColumn(name="m_id")},inverseJoinColumns
+	={@JoinColumn(name="s_id")})
+	private Set<Medicine> substitutes = new HashSet<Medicine>();
+}
+<br>
+@Table(name="position")<br>
+@Entity<br>
+public class Position {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	@Column(length=32,nullable=false)
+	//职位的名称
+	private String name;
+	//该职位下的医生
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="position",cascade=CascadeType.ALL)
+	@OrderBy(value="id ASC")
+	private Set<Doctor> doctors = new HashSet<Doctor>();
+}
+<br>
+@Entity<br>
+@Table(name="prescription")<br>
+public class Prescription {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
+	@DateTimeFormat(pattern="MM/dd/yyyy")
+	@Temporal(TemporalType.DATE)
+	//处方开始日期
+	private Date begindate;
+	@DateTimeFormat(pattern="MM/dd/yyyy")
+	@Temporal(TemporalType.DATE)
+	//处方终止日期
+	private Date enddate;
+	//有效抓要次数
+	@Column(length=4)
+	private int crawlagainst;
+	//处方所属用户
+	@ManyToOne(fetch=FetchType.LAZY,targetEntity=User.class,optional=false)
+	@JoinColumn(name="uid")
+	private User user;
+	//处方所属医生
+	@ManyToOne(fetch=FetchType.LAZY,targetEntity=Doctor.class,optional=false)
+	@JoinColumn(name="did")
+	private Doctor doctor;
+	
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="prescription",cascade=CascadeType.ALL)
+	private Set<PrescriptionDetail> prescriptionDetails = new HashSet<PrescriptionDetail>();
+}
+<br>
+@Entity<br>
+@Table(name="prescriptiondetail")<br>
+public class PrescriptionDetail {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	//该药的数量
+	@Column(length=4)
+	private int count;
+	//该药的单位
+	@Column(length=16)
+	private String unit;
+	@Column(length=128)
+	private String takemethod;
+	@Column(length=16)
+	private String canuse;
+	@ManyToOne(fetch=FetchType.LAZY,targetEntity=Prescription.class,optional=false)
+	@JoinColumn(name="pid")
+	private Prescription prescription;
+	@ManyToOne(fetch=FetchType.LAZY,targetEntity=Medicine.class,optional=false)
+	@JoinColumn(name="mid")
+	private Medicine medicine;
+}
+<br>
+@Entity<br>
+@Table(name="user")<br>
+public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	// 用户id
+	private int id;
+	// 用户姓名
+	@Column(length=32)
+	private String name;
+	// 用户电话
+	private String telephone;
+	// 用户出生日期
+	@DateTimeFormat(pattern="MM/dd/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date birthday;
+	// 承保公司
+	@Column(length=32)
+	private String insuranceCompany;
+	// 保单号
+	@Column(length=32)
+	private String policyNumber;
+
+	/*
+	 * CascadeType.REFRESH当多个用户同时操作一个实体，为了用户取到的数据是实时的，在用shiite中的数据之前就可以调用一下refresh()方法
+	 * CascadeType.REMOVE级联删除，当调用remove()方法删除实体时会先级联删除相关数据
+	 * CascadeType.MERGE级联更新
+	 * CascadeType.ALL包含以上所有的属性
+	 */
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="user",cascade=CascadeType.ALL)
+	private Set<Prescription> prescriptions;
 }
